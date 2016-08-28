@@ -1,10 +1,10 @@
 Package: DataPoints
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Title: Makes working with data points in long or wide format easier
+Version: 0.1.1
+Author: Matt Campbell
+Maintainer: Matt Campbell <mjcampbell74@gmail.com>
 Description: More about what it does (maybe more than one line)
-License: What license is it under?
+License:
 LazyData: TRUE
 RoxygenNote: 5.0.1
