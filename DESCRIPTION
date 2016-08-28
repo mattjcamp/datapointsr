@@ -1,10 +1,10 @@
 Package: DataPoints
 Type: Package
-Title: Makes working with data points in long or wide format easier
-Version: 0.1.1
+Title: DataPoints
+Version: 0.1.2
 Author: Matt Campbell
 Maintainer: Matt Campbell <mjcampbell74@gmail.com>
-Description: More about what it does (maybe more than one line)
+Description: DataPoints provides a standard format for presenting statistical results. You can present the content in long or wide formats and apply SQL style filters to look at your statistical summaries. Data Points is intended to automate the work needed to explore a dataset or to do QC analysis.
 License:
 LazyData: TRUE
 RoxygenNote: 5.0.1
