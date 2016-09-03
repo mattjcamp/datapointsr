@@ -9,7 +9,7 @@ So, what I do now is put the data into a melted format that is easily to inspect
   - Variable (the name of the original measure or data table column name)
   - Value (the statistic I need to verify)
 
-With the statisical summary in an standard format, I can easily find what data points don't match. Also, it's easy look at data points in a wide format (where each statistical gets it's own column). This makes some analysis, dashboard input and visualization easier.
+With the statisical summary in an standard format, I can easily find what data points don't match. Also, it's easy to look at data points in a wide format (where each statistical gets it's own column). This makes some analysis, dashboard input and visualization easier.
 
 Finally, both the wide and long formats support SQL style filtering to make it easy to inspect subsets of data points.
 
