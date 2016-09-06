@@ -23,7 +23,7 @@ datapoints <- function(df,
 
   # CONSTRUCTOR
 
-  d <- df
+  d <- as.data.frame(df)
 
   num_columns <- length(names(d))
   all.cols <- 1:num_columns
