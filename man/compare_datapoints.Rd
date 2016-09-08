@@ -31,8 +31,6 @@ q <- datapoints(q, c(1,2,5))
 head(f)
 head(q)
 
-# READY TO INVESTIGATE DIFFERENCES
-
 d <- compare_datapoints(f, q)
 }
 \keyword{QC}

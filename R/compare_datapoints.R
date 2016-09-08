@@ -114,6 +114,8 @@ compare_datapoints <- function(f, q){
   me$f <- f
   me$q <- q
 
+  class(me) <- append(class(me),"DataPoints_Compare")
+
   me
 
 }
