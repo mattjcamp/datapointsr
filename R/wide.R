@@ -16,7 +16,7 @@
 #'
 
 wide <- function(dp){
-    len <- length(dp) - 2
+    len <- length(names(dp)) - 2
     d <- reshape(dp,
                  timevar = "Variable",
                  times = "Value",
