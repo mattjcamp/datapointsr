@@ -16,13 +16,24 @@ Returns an object that holds two datasets in data points format, use
 with functions that compare datapoints
 }
 \examples{
+f <- quakes
+q <- quakes
 
-USE WIDE WITH DATAPOINTS
+q <- q[order(q$long), ]
+q[56, 3] <- 1234
 
-datapoints(quakes, c(1,2,5)) \%>\%
-wide() \%>\%
-head()
+head(f)
+head(q)
 
+f <- datapoints(f, c(1,2,5))
+q <- datapoints(q, c(1,2,5))
+
+head(f)
+head(q)
+
+# READY TO INVESTIGATE DIFFERENCES
+
+d <- compare_datapoints(f, q)
 }
 \keyword{QC}
 \keyword{dataset,}

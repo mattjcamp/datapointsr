@@ -36,6 +36,7 @@ datapoints <- function(df,
   names(d)[length(d) - 1] <- "Variable"
   names(d)[length(d)] <- "Value"
 
+  class(d) <- append(class(d),"DataPoints")
 
   d
 
