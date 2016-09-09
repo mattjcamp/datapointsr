@@ -1,15 +1,13 @@
 
-#' Check Data Points Categories
+#' Check Meta Categories
 #'
-#' Returns an object that holds two datasets in data points format, use
-#' with functions that compare datapoints
-#' @param f a data points object provided by the fulfiller
-#' @param q a data points object produced by the qc'er
+#' Compares the types of categories in datapoints
+#' @param a datapoints.compare object
 #' @keywords dataset, utility, QC
 #' @export
 #' @examples
 
-check_datapoints_categories <- function(datapoints.compare){
+check_categories_meta <- function(datapoints.compare){
 
   me <- list()
 
@@ -38,20 +36,11 @@ check_datapoints_categories <- function(datapoints.compare){
   if (length(cat.not.in.q) > 0)
     me$Categories_Not_In_Q_But_In_F <- cat.not.in.q
 
+  # CHECK ORDER OF CATEGORIES IF NUMBER IS THE SAME
+  # AND THERE IS NO OVERLAP
+
+  # CHECK CLASS AND MODE IF THE CATEGORIES ARE THE SAME
+
   me
 
 }
-
-f <- quakes
-q <- quakes
-f$Sigma <- "999"
-f$G <- "Good"
-q <- q[order(q$long), ]
-q[56, 3] <- 1234
-q$New_Cat <- "MEOW"
-f <- datapoints(f, c(1,2,5,6,7))
-q <- datapoints(q, c(1,2,5,6))
-d <- compare_datapoints(f, q)
-
-check.cat <- check_datapoints_categories(d)
-check.cat
