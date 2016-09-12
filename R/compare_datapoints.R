@@ -70,7 +70,7 @@ compare_datapoints <- function(f, q){
 
   append.cat.variable.key.to <- function(ds) {
 
-    len.names <- length(names(ds)) - 1
+    len.names <- length(names(ds)) - 2
     keynames <- paste(names(ds)[1:len.names], collapse = " || ")
     ds <- sqldf(sprintf("SELECT D.*, %s AS key_cat_var from ds D",
                         keynames))
@@ -85,7 +85,8 @@ compare_datapoints <- function(f, q){
 
   append.key.to <- function(ds) {
 
-    keynames <- paste(names(ds), collapse = " || ")
+    len.names <- length(names(ds)) - 2
+    keynames <- paste(names(ds)[1:len.names], collapse = " || ")
     ds <- sqldf(sprintf("SELECT D.*, %s AS key from ds D",
                         keynames))
 

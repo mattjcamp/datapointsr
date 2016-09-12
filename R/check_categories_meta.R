@@ -18,7 +18,7 @@ check_categories_meta <- function(datapoints.compare){
   if (!"DataPoints_Compare" %in% class(datapoints.compare))
     stop("datapoints.compare must be DataPoints_Compare object")
 
-  me$report <- "Check Categories"
+  me$report <- "Check Category Metadata"
 
   num.cat.f <- length(names(datapoints.compare$f)) - 4
   num.cat.q <- length(names(datapoints.compare$q)) - 4
