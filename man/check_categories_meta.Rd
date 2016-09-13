@@ -4,10 +4,10 @@
 \alias{check_categories_meta}
 \title{Check Meta Categories}
 \usage{
-check_categories_meta(datapoints.compare)
+check_categories_meta(dc)
 }
 \arguments{
-\item{a}{datapoints.compare object}
+\item{dc}{output from the compare_datapoints function}
 }
 \description{
 Compares the types of categories in datapoints
