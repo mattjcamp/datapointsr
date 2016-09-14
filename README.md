@@ -22,7 +22,7 @@ format (the Variable, Value combination that comes from `reshape`). This would w
 with  the `dplyr` verbs like `select()` and `filter()`. I would also want to define these 
 new verbs specifically for DataPoints:
 
-- `sql.filter()` 
+- `sql_filter()` 
 - `wide()`
 
 ## QC Analysis Workflow
