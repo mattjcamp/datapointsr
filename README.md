@@ -34,22 +34,22 @@ and in the right format. You can also tests if the values in both datasets match
 Here is how to see if two sets of categories match up using datapoints using the 
 `quakes` built-in dataset as an example.
 
-  # PULL THE DATASETS
-  
-  f <- quakes
-  q <- quakes
-  
-  # BUILD THE DATAPOINTS OBJECTS
-  f <- datapoints(f, c(1,2,5))
-  q <- datapoints(q, c(1,2,5))
-  
-  # BUILD THE DATAPOINTS COMPARER OBJECT
-  
-  dc <- compare_datapoints(f, q)
-  
-  # CHECK CATEGORY METADATA TO SEE IF THEY BOTH MATCH
-  
-  check_categories_meta(dc)$match
+    # PULL THE DATASETS
+    
+    f <- quakes
+    q <- quakes
+    
+    # BUILD THE DATAPOINTS OBJECTS
+    f <- datapoints(f, c(1,2,5))
+    q <- datapoints(q, c(1,2,5))
+    
+    # BUILD THE DATAPOINTS COMPARER OBJECT
+    
+    dc <- compare_datapoints(f, q)
+    
+    # CHECK CATEGORY METADATA TO SEE IF THEY BOTH MATCH
+    
+    check_categories_meta(dc)$match
 
 This would report back `TRUE`. If you don't specify the list member that you want you will
 get more information.
