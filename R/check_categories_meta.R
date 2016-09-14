@@ -15,16 +15,19 @@ check_categories_meta <- function(dc){
 
   # CHECK CLASS
 
-  if (!"DataPoints_Compare" %in% class(dc))
-    stop("dc must be DataPoints_Compare object")
+  if (!"compare_datapoints" %in% class(dc))
+    stop("dc must be compare_datapoints object")
 
   me$report <- "CHECK CATEGORY META"
 
   test <- compare(names(dc$f), names(dc$q))
-  if (test$equal)
-    me$status <- "Category meta matches 100%"
+  if (test$equal) {
 
-  if (!test$equal) {
+    me$match <- TRUE
+
+  } else {
+
+    me$match <- FALSE
 
     num.cat.f <- length(names(dc$f)) - 4
     num.cat.q <- length(names(dc$q)) - 4
@@ -48,6 +51,8 @@ check_categories_meta <- function(dc){
     # CHECK CLASS AND MODE IF THE CATEGORIES ARE THE SAME
 
   }
+
+  class(me) <- append(class(me),"check_categories_meta")
 
   me
 

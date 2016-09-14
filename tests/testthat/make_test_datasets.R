@@ -1,0 +1,46 @@
+
+# MAKE TEST DATASETS
+
+# LONG CATEGORIES MISMATCHED
+
+f <- quakes
+q <- quakes
+f$Sigma <- "999"
+f$G <- "Good"
+q$New_Cat <- "MEOW"
+q <- q[order(q$long), ]
+q[56, 3] <- 1234
+f <- f[c(1:35,39:1000),]
+f <- datapoints(f, c(1,2,5,6,7))
+q <- datapoints(q, c(1,2,5,6))
+f_long <- f
+q_long <- q
+
+# SHORT CATEGORIES MISMATCHED
+
+f <- quakes
+q <- quakes
+f <- datapoints(f, c(1,2,5))
+q <- datapoints(q, c(1,2,5))
+q <- q[1:5, ]
+f <- f[c(1, 2, 4, 5), ]
+f_short_1 <- f
+q_short_1 <- q
+
+# SHORT MATCHING
+
+f <- quakes
+q <- quakes
+f <- datapoints(f, c(1,2,5))
+q <- datapoints(q, c(1,2,5))
+q <- q[1:5, ]
+f <- f[1:5, ]
+q_short_matched <- q[1:5, ]
+f_short_matched <- f[1:5, ]
+q <- q_short_matched
+f <- f_short_matched
+
+f <- NULL
+q <- NULL
+rm(f)
+rm(q)

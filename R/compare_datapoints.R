@@ -35,8 +35,8 @@ compare_datapoints <- function(f, q){
 
     # CHECK CLASS
 
-    if (!"DataPoints" %in% class(ds))
-      stop("Both f and q must be DataPoints objects")
+    if (!"datapoints" %in% class(ds))
+      stop("Both f and q must be datapoints objects")
 
     # CHECK COLUMN NAMES
 
@@ -115,7 +115,7 @@ compare_datapoints <- function(f, q){
   me$f <- f
   me$q <- q
 
-  class(me) <- append(class(me),"DataPoints_Compare")
+  class(me) <- append(class(me),"compare_datapoints")
 
   me
 
