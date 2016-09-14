@@ -2,6 +2,7 @@
 
 export(check_categories_content)
 export(check_categories_meta)
+export(check_value_content)
 export(compare_datapoints)
 export(datapoints)
 export(filter_sql)

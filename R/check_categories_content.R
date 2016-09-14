@@ -40,7 +40,6 @@ check_categories_content <- function(dc){
     if (length(qcat != length(unique(qcat))))
       me$warning <- "q datapoints has duplicate category-variable rows"
 
-
     # CHECK FOR MATCHING CONTENT
 
     common_cat_keys <- sqldf("
@@ -59,7 +58,7 @@ check_categories_content <- function(dc){
     nrow_f <- nrow(in_f_but_not_q)
     nrow_q <- nrow(in_q_but_not_f)
 
-    if (nrow_f == nrow_q) {
+    if (nrow_f == 0 & nrow_q == 0) {
       me$match <- TRUE
     } else {
       me$match <- FALSE

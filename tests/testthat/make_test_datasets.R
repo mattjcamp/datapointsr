@@ -44,3 +44,24 @@ f <- NULL
 q <- NULL
 rm(f)
 rm(q)
+
+# SHORT CAT MATCHING, VALUES OFF
+
+f <- quakes
+q <- quakes
+f <- datapoints(f, c(1,2,5))
+f$Value[3] <- f$Value[3] + 5
+q <- datapoints(q, c(1,2,5))
+q$Value[3] <- q$Value[4] + 15
+
+q <- q[1:5, ]
+f <- f[1:5, ]
+q_short_unmatched <- q[1:5, ]
+f_short_unmatched <- f[1:5, ]
+q <- q_short_unmatched
+f <- f_short_unmatched
+
+f <- NULL
+q <- NULL
+rm(f)
+rm(q)

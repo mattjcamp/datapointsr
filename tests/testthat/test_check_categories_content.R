@@ -6,7 +6,6 @@ context("CATEGORY CONTENT MATCH FUNCTION TESTS")
 source("make_test_datasets.R")
 
 dc <- compare_datapoints(f_long, q_long)
-dc <- compare_datapoints(f_short_matched, q_short_matched)
 
 check.cat <- check_categories_content(dc)
 
