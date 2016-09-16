@@ -65,3 +65,23 @@ f <- NULL
 q <- NULL
 rm(f)
 rm(q)
+
+# CATEGORIES OUT OF ORDER
+
+f <- quakes
+q <- quakes
+f <- datapoints(f, c(1,2,5))
+q <- datapoints(q, c(1,2,5))
+q <- q[1:5, c(3,2,1,4,5)]
+f <- f[1:5, ]
+q_short_out_of_order <- q
+f_short_out_of_order <- f
+q <- q_short_out_of_order
+f <- f_short_out_of_order
+
+f <- NULL
+q <- NULL
+rm(f)
+rm(q)
+
+# CATEGORIES MISMATCHED

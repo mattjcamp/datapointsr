@@ -22,3 +22,10 @@ check.cat <- check_categories_meta(dc)
 test_that("check_categories_meta finds category metadata matches", {
   expect_equal(check.cat$match, TRUE)
 })
+
+dc <- compare_datapoints(f_short_out_of_order, q_short_out_of_order)
+check.cat <- check_categories_meta(dc)
+
+test_that("check_categories_meta finds category metadata matches", {
+  expect_equal(check.cat$match, FALSE)
+})
