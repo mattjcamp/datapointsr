@@ -1,5 +1,3 @@
-library(testthat)
-library(DataPoints)
 
 context("COMPARE DATAPOINTS CONSTRUCTOR TESTS")
 

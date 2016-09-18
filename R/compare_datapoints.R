@@ -27,6 +27,9 @@
 
 compare_datapoints <- function(f, q){
 
+  library(reshape)
+  library(dplyr)
+
   me <- list()
 
   # MAKE SURE BOTH DATAPOINTS ARE IN THE EXPECTED FORMAT
@@ -54,11 +57,10 @@ compare_datapoints <- function(f, q){
   # APPEND CATEGORY KEY
 
   append.cat.key.to <- function(ds) {
-
     len.names <- length(names(ds)) - 2
     keynames <- paste(names(ds)[1:len.names], collapse = " || ")
-    ds <- sqldf(sprintf("SELECT D.*, %s AS key_cat from ds D",
-                        keynames))
+    ds <- sqldf::sqldf(sprintf("SELECT D.*, %s AS key_cat from ds D",
+                               keynames))
 
     ds
   }
@@ -72,8 +74,8 @@ compare_datapoints <- function(f, q){
 
     len.names <- length(names(ds)) - 2
     keynames <- paste(names(ds)[1:len.names], collapse = " || ")
-    ds <- sqldf(sprintf("SELECT D.*, %s AS key_cat_var from ds D",
-                        keynames))
+    ds <- sqldf::sqldf(sprintf("SELECT D.*, %s AS key_cat_var from ds D",
+                               keynames))
 
     ds
   }
@@ -87,8 +89,8 @@ compare_datapoints <- function(f, q){
 
     len.names <- length(names(ds)) - 2
     keynames <- paste(names(ds)[1:len.names], collapse = " || ")
-    ds <- sqldf(sprintf("SELECT D.*, %s AS key from ds D",
-                        keynames))
+    ds <- sqldf::sqldf(sprintf("SELECT D.*, %s AS key from ds D",
+                               keynames))
 
     ds
   }
@@ -101,8 +103,8 @@ compare_datapoints <- function(f, q){
   arrange.datapoints <- function(ds) {
 
     keynames <- paste(names(ds), collapse = ",")
-    ds <- sqldf(sprintf("SELECT * FROM ds ORDER BY %s",
-                        keynames))
+    ds <- sqldf::sqldf(sprintf("SELECT * FROM ds ORDER BY %s",
+                               keynames))
 
     ds
   }

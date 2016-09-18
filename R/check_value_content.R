@@ -9,6 +9,10 @@
 
 check_value_content <- function(dc){
 
+  library(reshape)
+  library(dplyr)
+  library(sqldf)
+
   me <- list()
 
   # CHECK dc CLASS
@@ -42,7 +46,7 @@ check_value_content <- function(dc){
 
     # CHECK FOR MATCHING CONTENT
 
-    common_keys <- sqldf("
+    common_keys <- sqldf::sqldf("
 
       SELECT F.key
       FROM f F

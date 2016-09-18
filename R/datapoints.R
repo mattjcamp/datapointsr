@@ -18,8 +18,6 @@ datapoints <- function(df,
 
   library(reshape)
   library(dplyr)
-  library(stringr)
-  library(sqldf)
 
   # CONSTRUCTOR
 
@@ -29,9 +27,9 @@ datapoints <- function(df,
   all.cols <- 1:num_columns
   measure.vars <- all.cols[!all.cols %in% category.cols]
 
-  d <- melt(data = d,
-            id.vars = category.cols,
-            measure.vars = measure.vars)
+  d <- reshape::melt(data = d,
+                     id.vars = category.cols,
+                     measure.vars = measure.vars)
 
   names(d)[length(d) - 1] <- "Variable"
   names(d)[length(d)] <- "Value"

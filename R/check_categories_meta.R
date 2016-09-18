@@ -9,6 +9,9 @@
 
 check_categories_meta <- function(dc){
 
+  library(reshape)
+  library(dplyr)
+
   me <- list()
 
   # MAKE SURE dc IS IN THE EXPECTED FORMAT

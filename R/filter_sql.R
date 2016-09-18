@@ -15,5 +15,8 @@
 #'
 
 filter_sql <- function(dp, filter){
-  sqldf(sprintf("SELECT * FROM dp WHERE %s", filter))
+
+  library(reshape)
+
+  sqldf::sqldf(sprintf("SELECT * FROM dp WHERE %s", filter))
 }

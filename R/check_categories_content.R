@@ -9,6 +9,9 @@
 
 check_categories_content <- function(dc){
 
+  library(reshape)
+  library(dplyr)
+
   me <- list()
 
   # CHECK dc CLASS
@@ -42,7 +45,7 @@ check_categories_content <- function(dc){
 
     # CHECK FOR MATCHING CONTENT
 
-    common_cat_keys <- sqldf("
+    common_cat_keys <- sqldf::sqldf("
 
       SELECT F.key_cat_var
       FROM f F

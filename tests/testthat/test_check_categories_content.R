@@ -1,5 +1,3 @@
-library(testthat)
-library(DataPoints)
 
 context("CATEGORY CONTENT MATCH FUNCTION TESTS")
 
@@ -19,4 +17,3 @@ check.cat <- check_categories_content(dc)
 test_that("check_categories_content finds category content finds missing rows in q", {
   expect_equal(check.cat$match, FALSE)
 })
-

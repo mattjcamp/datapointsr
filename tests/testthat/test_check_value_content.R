@@ -1,5 +1,3 @@
-library(testthat)
-library(DataPoints)
 
 context("VALUE CONTENT MATCH FUNCTION TESTS")
 

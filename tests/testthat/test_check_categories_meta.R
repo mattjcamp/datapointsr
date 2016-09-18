@@ -1,5 +1,3 @@
-library(testthat)
-library(DataPoints)
 
 context("CHECK CATEGORY META TESTS")
 

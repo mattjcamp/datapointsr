@@ -8,3 +8,7 @@ Description: datapointsr provides a standard format for presenting statistical r
 License: None
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Imports:
+  reshape,
+  stringr,
+  sqldf
