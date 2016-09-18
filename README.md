@@ -1,6 +1,6 @@
-# DataPoints
+# datapointsr
 
-DataPoints makes it easy to switch between long and wide format statistical summaries.
+**datapointsr** makes it easy to switch between long and wide format statistical summaries.
 
 When I do QC Analysis I'm have to verify the contents of statistical summaries by doing an exact 1:1 match. To identify mismatched data points I usually need to melt both my own table and the the content that I am inspecting. This is a pain.
 
