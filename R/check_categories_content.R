@@ -53,7 +53,7 @@ check_categories_content <- function(dc){
         ON F.key_cat_var = Q.key_cat_var")$key_cat_var
 
     f_cat_keys <- common_cat_keys[!f$key_cat_var %in% common_cat_keys]
-    q_cat_keys <- common_cat_keys[!q$key_cat_var %in% common_cat_keys]
+    q_cat_keys <- q$key_cat_var[!q$key_cat_var %in% common_cat_keys]
 
     in_f_but_not_q <- filter(f, key_cat_var %in% f_cat_keys)
     in_q_but_not_f <- filter(q, key_cat_var %in% q_cat_keys)

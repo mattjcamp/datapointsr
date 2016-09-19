@@ -37,11 +37,11 @@ check_value_content <- function(dc){
     # CHECK FOR DUPLICATES
 
     fkey <- f$key
-    if (length(fkey != length(unique(fkey))))
+    if (length(fkey) != length(unique(fkey)))
       me$warning <- "f datapoints has duplicate rows"
 
     qkey <- q$key
-    if (length(qkey != length(unique(qkey))))
+    if (length(qkey) != length(unique(qkey)))
       me$warning <- "q datapoints has duplicate rows"
 
     # CHECK FOR MATCHING CONTENT
