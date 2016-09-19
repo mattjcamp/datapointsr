@@ -36,11 +36,11 @@ check_categories_content <- function(dc){
     # CHECK FOR DUPLICATES
 
     fcat <- f$key_cat_var
-    if (length(fcat != length(unique(fcat))))
+    if (length(fcat) != length(unique(fcat)))
       me$warning <- "f datapoints has duplicate category-variable rows"
 
     qcat <- q$key_cat_var
-    if (length(qcat != length(unique(qcat))))
+    if (length(qcat) != length(unique(qcat)))
       me$warning <- "q datapoints has duplicate category-variable rows"
 
     # CHECK FOR MATCHING CONTENT

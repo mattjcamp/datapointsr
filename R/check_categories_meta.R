@@ -11,6 +11,7 @@ check_categories_meta <- function(dc){
 
   library(reshape)
   library(dplyr)
+  library(compare)
 
   me <- list()
 
@@ -24,7 +25,7 @@ check_categories_meta <- function(dc){
   me$report <- "CHECK CATEGORY META"
 
   test <- compare(names(dc$f), names(dc$q))
-  if (test$equal) {
+  if (test$result == TRUE) {
 
     me$match <- TRUE
 
