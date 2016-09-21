@@ -82,7 +82,7 @@ check_value_content <- function(dc){
 
       side_by_side_f_q <- side_by_side_f_q %>%
         mutate(Diff = as.numeric(Value_F) - as.numeric(Value_Q)) %>%
-        mutate(Match = ifelse(Diff == 0, TRUE, FALSE))
+        mutate(Match = ifelse(Value_F == Value_Q, TRUE, FALSE))
 
       me$side_by_side_f_q <- side_by_side_f_q
 
