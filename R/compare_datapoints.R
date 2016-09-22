@@ -36,10 +36,10 @@ compare_datapoints <- function(f, q){
 
   verify.datapoints.format <- function(ds) {
 
-    # CHECK CLASS
-
-    if (!"datapoints" %in% class(ds))
-      stop("Both f and q must be datapoints objects")
+    # # CHECK CLASS
+    # 
+    # if (!"datapoints" %in% class(ds))
+    #   stop("Both f and q must be datapoints objects")
 
     # CHECK COLUMN NAMES
 
