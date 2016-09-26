@@ -53,6 +53,11 @@ compare_datapoints <- function(f, q){
 
   verify.datapoints.format(f)
   verify.datapoints.format(q)
+  
+  # REMOVE NA VALUE
+  
+  f <- mutate(f, Value = ifelse(is.na(Value), "NA", Value))
+  q <- mutate(q, Value = ifelse(is.na(Value), "NA", Value))
 
   # APPEND CATEGORY KEY
 
@@ -101,8 +106,9 @@ compare_datapoints <- function(f, q){
   # ARRANGE
 
   arrange.datapoints <- function(ds) {
-
-    keynames <- paste(names(ds), collapse = ",")
+    
+    l <- length(ds) - 3
+    keynames <- paste(names(ds)[1:l], collapse = ",")
     ds <- sqldf::sqldf(sprintf("SELECT * FROM ds ORDER BY %s",
                                keynames))
 

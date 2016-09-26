@@ -18,9 +18,3 @@ test_that("check_categories_content finds category content finds missing rows in
   expect_equal(check.cat$match, FALSE)
 })
 
-dc <- compare_datapoints(f_short_matched_dups, q_short_matched_dups)
-check.cat <- check_categories_content(dc)
-
-test_that("Dups are detected", {
-   expect_equal(check.cat$match, FALSE)
-})

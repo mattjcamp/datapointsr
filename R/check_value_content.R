@@ -27,7 +27,7 @@ check_value_content <- function(dc){
 
   if (!cat.match$match) {
     me$match <- FALSE
-    me$report <- "MAKE SURE THE CATAGORIES MATCHES BEFORE ATTEMPTING TO MATCH VALUE ROW CONTENT"
+    me$report <- "MAKE SURE CATEGORIES MATCH BEFORE ATTEMPTING TO MATCH VALUE ROW CONTENT"
     me$cat.match <- cat.match
   } else {
 
@@ -37,13 +37,16 @@ check_value_content <- function(dc){
     # CHECK FOR DUPLICATES
 
     fkey <- f$key
-    if (length(fkey) != length(unique(fkey)))
-      me$warning <- "f datapoints has duplicate rows"
-
+    if (length(fkey) != length(unique(fkey))){
+      print("WARNING: f datapoints has duplicate rows")
+      f <- distinct(f)
+    }
     qkey <- q$key
-    if (length(qkey) != length(unique(qkey)))
-      me$warning <- "q datapoints has duplicate rows"
-
+    if (length(qkey) != length(unique(qkey))){
+      print("WARNING: q datapoints has duplicate rows")
+      q <- distinct(q)
+    }
+    
     # CHECK FOR MATCHING CONTENT
 
     common_keys <- sqldf::sqldf("
