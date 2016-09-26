@@ -12,6 +12,7 @@ check_categories_content <- function(dc){
   library(reshape)
   library(dplyr)
   library(sqldf)
+  library(coderr)
 
   me <- list()
 
@@ -41,7 +42,10 @@ check_categories_content <- function(dc){
       me$warning <- "f datapoints has duplicate category-variable rows"
       dups <- sqldf("SELECT key_cat_var, count(*) AS N FROM f GROUP BY key_cat_var")
       dups <- sqldf("SELECT key_cat_var from dups WHERE N > 1")
-      me$dupsf <- filter(f, key_cat_var %in% dups$key_cat_var)
+      dups <- filter(f, key_cat_var %in% dups$key_cat_var)
+      num_var <- length(names(f)) - 3
+      me$dupsf <-  sqldf(sprintf("SELECT %s FROM dups",
+                                 code_vector_to_csv_list(names(f)[1:num_var], FALSE, FALSE)))
 
     }
 
@@ -50,7 +54,10 @@ check_categories_content <- function(dc){
       me$warning <- "q datapoints has duplicate category-variable rows"
       dups <- sqldf("SELECT key_cat_var, count(*) AS N FROM q GROUP BY key_cat_var")
       dups <- sqldf("SELECT key_cat_var from dups WHERE N > 1")
-      me$dupsq <- filter(f, key_cat_var %in% dups$key_cat_var)
+      dups <- filter(q, key_cat_var %in% dups$key_cat_var)
+      num_var <- length(names(q)) - 3
+      me$dupsq <-  sqldf(sprintf("SELECT %s FROM dups",
+                                 code_vector_to_csv_list(names(q)[1:num_var], FALSE, FALSE)))
 
     }
 

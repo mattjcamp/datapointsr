@@ -4,10 +4,10 @@
 \alias{filter_sql}
 \title{SQL Filter}
 \usage{
-filter_sql(dp, filter)
+filter_sql(d, filter)
 }
 \arguments{
-\item{dp}{a data points object}
+\item{d}{data points, compare_datapoints or dataframe object}
 }
 \description{
 Filters data points
