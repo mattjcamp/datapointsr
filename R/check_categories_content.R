@@ -11,6 +11,7 @@ check_categories_content <- function(dc){
 
   library(reshape)
   library(dplyr)
+  library(sqldf)
 
   me <- list()
 
@@ -36,12 +37,22 @@ check_categories_content <- function(dc){
     # CHECK FOR DUPLICATES
 
     fcat <- f$key_cat_var
-    if (length(fcat) != length(unique(fcat)))
+    if (length(fcat) != length(unique(fcat))) {
       me$warning <- "f datapoints has duplicate category-variable rows"
+      dups <- sqldf("SELECT key_cat_var, count(*) AS N FROM f GROUP BY key_cat_var")
+      dups <- sqldf("SELECT key_cat_var from dups WHERE N > 1")
+      me$dupsf <- filter(f, key_cat_var %in% dups$key_cat_var)
+
+    }
 
     qcat <- q$key_cat_var
-    if (length(qcat) != length(unique(qcat)))
+    if (length(qcat) != length(unique(qcat))) {
       me$warning <- "q datapoints has duplicate category-variable rows"
+      dups <- sqldf("SELECT key_cat_var, count(*) AS N FROM q GROUP BY key_cat_var")
+      dups <- sqldf("SELECT key_cat_var from dups WHERE N > 1")
+      me$dupsq <- filter(f, key_cat_var %in% dups$key_cat_var)
+
+    }
 
     # CHECK FOR MATCHING CONTENT
 

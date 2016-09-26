@@ -1,6 +1,21 @@
 
 # MAKE TEST DATASETS
 
+# SHORT DUPS
+
+f <- quakes
+q <- quakes
+f <- datapoints(f, c(1,2,5))
+q <- datapoints(q, c(1,2,5))
+q <- q[1:5, ]
+f <- f[1:5, ]
+f_dups <- f[2:3,]
+f <- rbind(f, f_dups)
+q_short_matched_dups <- q
+f_short_matched_dups <- f
+q <- q_short_matched_dups
+f <- f_short_matched_dups
+
 # LONG CATEGORIES MISMATCHED
 
 f <- quakes
