@@ -25,8 +25,12 @@ check_categories_meta <- function(dc){
   me$report <- "CHECK CATEGORY META"
 
   test1 <- compare(names(dc$f), names(dc$q))
-  f_c <- sapply(dc$f, class)
-  q_c <- sapply(dc$q, class)
+  len_f <- length(names(dc$f)) - 4
+  len_q <- length(names(dc$q)) - 4
+  len <- len_f
+  
+  f_c <- sapply(dc$f, class)[1:len_f]
+  q_c <- sapply(dc$q, class)[1:len_f]
   test2 <- compare(f_c, q_c)
 
   if (test1$result == TRUE & test2$result == TRUE) {
@@ -59,18 +63,11 @@ check_categories_meta <- function(dc){
     } else {
 
       me$Num_of_Categories <- "f and q do have the same number of categories but they are out of order or don't match"
-      mode.f <- sapply(f, mode)
-      mode.q <- sapply(q, mode)
-      class.f <- sapply(f, class)
-      class.q <- sapply(q, class)
-
-      d <- data.frame(COL_F = names.f,
-                      COL_Q = names.q,
-                      MODE_F = mode.f,
-                      MODE_Q = mode.q,
-                      CLASS_F = class.f,
-                      CLASS_Q = class.q)
-      d <- d %>% mutate(MATCH = COL_F == COL_Q & MODE_F == MODE_Q & CLASS_F == CLASS_Q)
+      d <- data.frame(list(COL_F = names.f,
+                           COL_Q = names.q,
+                           CLASS_F = f_c[1:len],
+                           CLASS_Q = q_c[1:len]))
+      # d <- d %>% mutate(MATCH = COL_F == COL_Q & MODE_F == MODE_Q & CLASS_F == CLASS_Q)
       me$Category_Comparison <- d
 
     }
