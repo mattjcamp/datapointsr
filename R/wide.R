@@ -17,16 +17,15 @@
 
 wide <- function(dp){
 
-    library(reshape)
-    library(dplyr)
+  library(reshape)
+  library(stringr)
+  library(dplyr)
 
-    len <- length(names(dp)) - 2
-    d <- reshape::reshape(dp,
-                          timevar = "Variable",
-                          times = "Value",
-                          idvar = names(dp)[1:len],
-                          direction = "wide")
-    names(d) <- stringr::str_replace_all(names(d), "Value.", "")
+  len <- length(names(dp)) - 2
+  d <- reshape(dp,timevar = "Variable",
+               times = "Value",idvar = names(dp)[1:len],
+               direction = "wide")
+  names(d) <- str_replace_all(names(d), "Value.", "")
 
-    d
+  d
 }
