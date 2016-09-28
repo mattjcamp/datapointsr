@@ -1,6 +1,20 @@
 
 # MAKE TEST DATASETS
 
+# SHORT CLASS MISMATCH
+
+f <- quakes
+q <- quakes
+f <- datapoints(f, c(1,2,5))
+q <- datapoints(q, c(1,2,5))
+q <- q[1:5, ]
+f <- f[1:5, ]
+q$lat <- as.character(q$lat)
+q_class_mismatch <- q[1:5, ]
+f_class_mismatch <- f[1:5, ]
+q <- q_class_mismatch
+f <- f_class_mismatch
+
 # SHORT DUPS
 
 f <- quakes

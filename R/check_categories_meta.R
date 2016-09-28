@@ -24,8 +24,12 @@ check_categories_meta <- function(dc){
 
   me$report <- "CHECK CATEGORY META"
 
-  test <- compare(names(dc$f), names(dc$q))
-  if (test$result == TRUE) {
+  test1 <- compare(names(dc$f), names(dc$q))
+  f_c <- sapply(dc$f, class)
+  q_c <- sapply(dc$q, class)
+  test2 <- compare(f_c, q_c)
+
+  if (test1$result == TRUE & test2$result == TRUE) {
 
     me$match <- TRUE
 
@@ -55,10 +59,10 @@ check_categories_meta <- function(dc){
     } else {
 
       me$Num_of_Categories <- "f and q do have the same number of categories but they are out of order or don't match"
-      mode.f <- mode(names.f)
-      mode.q <- mode(names.q)
-      class.f <- class(names.f)
-      class.q <- class(names.q)
+      mode.f <- sapply(f, mode)
+      mode.q <- sapply(q, mode)
+      class.f <- sapply(f, class)
+      class.q <- sapply(q, class)
 
       d <- data.frame(COL_F = names.f,
                       COL_Q = names.q,

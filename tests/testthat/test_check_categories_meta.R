@@ -27,3 +27,11 @@ check.cat <- check_categories_meta(dc)
 test_that("check_categories_meta finds category metadata matches", {
   expect_equal(check.cat$match, FALSE)
 })
+
+dc <- compare_datapoints(f_class_mismatch,
+                         q_class_mismatch)
+check.cat <- check_categories_meta(dc)
+
+test_that("check_categories_meta finds class mismatches", {
+  expect_equal(check.cat$match, FALSE)
+})
