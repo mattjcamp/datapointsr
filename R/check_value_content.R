@@ -66,7 +66,7 @@ check_value_content <- function(dc){
     nrow_q <- nrow(in_q_but_not_f)
 
     if (nrow_f == 0 & nrow_q == 0) {
-      me$match <- TRUE
+      me$match <- compare(f, q)
     } else {
       me$match <- FALSE
       col.len <- length(names(f)) - 3
