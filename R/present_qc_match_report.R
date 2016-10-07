@@ -19,16 +19,19 @@ present_qc_match_report <- function(dc, qc_title = ""){
 
     if (!is.null(df)) {
 
-      library(xtable)
-
-      html_table <- print(xtable(df),
-                          type = "html",
-                          include.rownames = FALSE)
-
-      html_table <- str_replace(html_table,
-                                "border=1",
-                                "border=0")
-      html_table <- sprintf("<center>%s</center>", html_table)
+      # library(xtable)
+      # 
+      # html_table <- print(xtable(df),
+      #                     type = "html",
+      #                     include.rownames = FALSE)
+      # 
+      # html_table <- str_replace(html_table,
+      #                           "border=1",
+      #                           "border=0")
+      # html_table <- sprintf("<center>%s</center>", html_table)
+      
+      library(knitr)
+      html_table <- kable(df)
 
     } else {
 
@@ -40,18 +43,17 @@ present_qc_match_report <- function(dc, qc_title = ""){
 
   }
 
-
   # TEST THREE LEVELS OF MATCHING
 
   match <- check_value_content(dc)
 
-  if (match$match)
+  if (match$match$result == TRUE)
     html <- sprintf("<div id = 'status_passed'><strong><big><big>%s</big></big></strong><br>", qc_title)
   else
     html <- sprintf("<div id = 'status_failed'><strong><big><big>%s</big></big></strong><br>", qc_title)
 
 
-  if (!match$match) {
+  if (!match$match$result) {
 
     cat.meta.match <- check_categories_meta(dc)
     cat.match <- check_categories_content(dc)

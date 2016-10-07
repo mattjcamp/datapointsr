@@ -22,17 +22,17 @@ check_value_content <- function(dc){
 
   # MAKE SURE THE CATEGORY CONTENT MATCHES BEFORE
   # ATTEMPTING TO MATCH THE CONTENT
+  
+  f <- dc$f
+  q <- dc$q
 
   cat.match <- check_categories_content(dc)
 
   if (!cat.match$match) {
-    me$match <- FALSE
+    me$match <- compare(f, q)
     me$report <- "MAKE SURE CATEGORIES MATCH BEFORE ATTEMPTING TO MATCH VALUE ROW CONTENT"
     me$cat.match <- cat.match
   } else {
-
-    f <- dc$f
-    q <- dc$q
 
     # CHECK FOR DUPLICATES
 
