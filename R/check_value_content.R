@@ -68,7 +68,7 @@ check_value_content <- function(dc){
     if (nrow_f == 0 & nrow_q == 0) {
       me$match <- compare(f, q)
     } else {
-      me$match <- FALSE
+      me$match <- compare(f, q)
       col.len <- length(names(f)) - 3
 
       side_by_side_f_q <- sqldf("
