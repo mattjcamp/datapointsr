@@ -31,8 +31,8 @@ datapoints <- function(df,
                      id.vars = category.cols,
                      measure.vars = measure.vars)
 
-  names(d)[length(d) - 1] <- "Variable"
-  names(d)[length(d)] <- "Value"
+  names(d)[length(d) - 1] <- "variable"
+  names(d)[length(d)] <- "value"
 
   class(d) <- append(class(d),"datapoints")
 

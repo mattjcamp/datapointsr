@@ -22,10 +22,10 @@ wide <- function(dp){
   library(dplyr)
 
   len <- length(names(dp)) - 2
-  d <- reshape(dp,timevar = "Variable",
-               times = "Value",idvar = names(dp)[1:len],
+  d <- reshape(dp,timevar = "variable",
+               times = "value",idvar = names(dp)[1:len],
                direction = "wide")
-  names(d) <- str_replace_all(names(d), "Value.", "")
+  names(d) <- str_replace_all(names(d), "value.", "")
 
   d
 }

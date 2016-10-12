@@ -120,12 +120,12 @@ present_qc_match_report <- function(dc, qc_title = ""){
     q <- dc$q[s, ]
 
     side_by_side_f_q <- sqldf("
-        SELECT F.*, F.Value AS Value_F, Q.Value AS Value_Q
+        SELECT F.*, F.value AS value_F, Q.value AS value_Q
         FROM f F
         JOIN q Q
           ON F.key_cat_var = Q.key_cat_var")
 
-    side_by_side_f_q$Value <- NULL
+    side_by_side_f_q$value <- NULL
     side_by_side_f_q$key <- NULL
     side_by_side_f_q$key_cat <- NULL
     side_by_side_f_q$key_cat_var <- NULL

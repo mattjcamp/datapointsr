@@ -8,8 +8,8 @@ So, what I do now is put the data into a melted format that is easily to inspect
 DataPoints. The format is: 
 
   - **Category** fields (used to filter data points)
-  - **Variable** (the name of the original measure or data table column name)
-  - **Value** (the statistic I need to verify)
+  - **variable** (the name of the original measure or data table column name)
+  - **value** (the statistic I need to verify)
 
 With the statisical summary in a standard format, I can easily find what data points 
 don't match. Also, it's easy to look at data points in a wide format (where each summary 
@@ -18,7 +18,7 @@ easier.
 
 The idea is that you would start the workflow by building a DataPoints object with the 
 dataframe and category specifications. This object will maintain the full dataset in a long
-format (the Variable, Value combination that comes from `reshape`). This would work as normal 
+format (the variable, value combination that comes from `reshape`). This would work as normal 
 with  the `dplyr` verbs like `select()` and `filter()`. I would also want to define these 
 new verbs specifically for DataPoints:
 

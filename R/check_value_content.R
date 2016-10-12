@@ -22,7 +22,7 @@ check_value_content <- function(dc){
 
   # MAKE SURE THE CATEGORY CONTENT MATCHES BEFORE
   # ATTEMPTING TO MATCH THE CONTENT
-  
+
   f <- dc$f
   q <- dc$q
 
@@ -46,7 +46,7 @@ check_value_content <- function(dc){
       print("WARNING: q datapoints has duplicate rows")
       q <- distinct(q)
     }
-    
+
     # CHECK FOR MATCHING CONTENT
 
     common_keys <- sqldf::sqldf("
@@ -73,19 +73,19 @@ check_value_content <- function(dc){
 
       side_by_side_f_q <- sqldf("
 
-        SELECT F.*, F.Value AS Value_F, Q.Value AS Value_Q
+        SELECT F.*, F.value AS value_F, Q.value AS value_Q
         FROM f F
         JOIN q Q
           ON F.key_cat_var = Q.key_cat_var")
 
-      side_by_side_f_q$Value <- NULL
+      side_by_side_f_q$value <- NULL
       side_by_side_f_q$key <- NULL
       side_by_side_f_q$key_cat <- NULL
       side_by_side_f_q$key_cat_var <- NULL
 
       side_by_side_f_q <- side_by_side_f_q %>%
-        mutate(Diff = as.numeric(Value_F) - as.numeric(Value_Q)) %>%
-        mutate(Match = ifelse(Value_F == Value_Q, TRUE, FALSE))
+        mutate(Diff = as.numeric(value_F) - as.numeric(value_Q)) %>%
+        mutate(Match = ifelse(value_F == value_Q, TRUE, FALSE))
 
       me$side_by_side_f_q <- side_by_side_f_q
 

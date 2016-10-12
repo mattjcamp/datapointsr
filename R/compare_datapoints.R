@@ -37,27 +37,27 @@ compare_datapoints <- function(f, q){
   verify.datapoints.format <- function(ds) {
 
     # # CHECK CLASS
-    # 
+    #
     # if (!"datapoints" %in% class(ds))
     #   stop("Both f and q must be datapoints objects")
 
     # CHECK COLUMN NAMES
 
     ds_len <- length(names(ds))
-    if (names(ds)[ds_len] != "Value")
-      stop("compare_datapoints: both f and q must be in DataPoints format (Value missing or in the wrong position)")
-    if (names(ds)[ds_len - 1] != "Variable")
-      stop("compare_datapoints: both f and q must be in DataPoints format (Variable missing or in the wrong position)")
+    if (names(ds)[ds_len] != "value")
+      stop("compare_datapoints: both f and q must be in DataPoints format (value missing or in the wrong position)")
+    if (names(ds)[ds_len - 1] != "variable")
+      stop("compare_datapoints: both f and q must be in DataPoints format (variable missing or in the wrong position)")
 
   }
 
   verify.datapoints.format(f)
   verify.datapoints.format(q)
-  
+
   # REMOVE NA VALUE
-  
-  f <- mutate(f, Value = ifelse(is.na(Value), "NA", Value))
-  q <- mutate(q, Value = ifelse(is.na(Value), "NA", Value))
+
+  f <- mutate(f, value = ifelse(is.na(value), "NA", value))
+  q <- mutate(q, value = ifelse(is.na(value), "NA", value))
 
   # APPEND CATEGORY KEY
 
@@ -106,7 +106,7 @@ compare_datapoints <- function(f, q){
   # ARRANGE
 
   arrange.datapoints <- function(ds) {
-    
+
     l <- length(ds) - 3
     keynames <- paste(names(ds)[1:l], collapse = ",")
     ds <- sqldf::sqldf(sprintf("SELECT * FROM ds ORDER BY %s",

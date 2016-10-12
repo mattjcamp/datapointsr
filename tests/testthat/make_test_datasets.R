@@ -79,9 +79,9 @@ rm(q)
 f <- quakes
 q <- quakes
 f <- datapoints(f, c(1,2,5))
-f$Value[3] <- f$Value[3] + 5
+f$value[3] <- f$value[3] + 5
 q <- datapoints(q, c(1,2,5))
-q$Value[3] <- q$Value[4] + 15
+q$value[3] <- q$value[4] + 15
 
 q <- q[1:5, ]
 f <- f[1:5, ]
