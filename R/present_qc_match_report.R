@@ -19,17 +19,6 @@ present_qc_match_report <- function(dc, qc_title = ""){
 
     if (!is.null(df)) {
 
-      # library(xtable)
-      #
-      # html_table <- print(xtable(df),
-      #                     type = "html",
-      #                     include.rownames = FALSE)
-      #
-      # html_table <- str_replace(html_table,
-      #                           "border=1",
-      #                           "border=0")
-      # html_table <- sprintf("<center>%s</center>", html_table)
-
       library(knitr)
       html_table <- kable(df, format = "html")
 
@@ -114,7 +103,7 @@ present_qc_match_report <- function(dc, qc_title = ""){
     html <- sprintf("%s<strong>Value Content is Matched</strong><br>", html)
 
     v <- 1:nrow(dc$f)
-    s <- sample(v, 5)
+    s <- sample(v, 5, replace = TRUE)
 
     f <- dc$f[s, ]
     q <- dc$q[s, ]
