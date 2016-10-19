@@ -103,7 +103,7 @@ present_qc_match_report <- function(dc, qc_title = ""){
     side_by_side_f_q$key_cat <- NULL
     side_by_side_f_q$key_cat_var <- NULL
 
-    tab <- kable(head(side_by_side_f_q, format = "html"))
+    tab <- kable(head(side_by_side_f_q), format = "html")
     html <- sprintf("%s<strong>Random 5 Value Rows (Sanity Check) </strong><br>%s", html, tab)
 
   }

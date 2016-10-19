@@ -1,7 +1,7 @@
 Package: datapointsr
 Type: Package
 Title: DataPoints
-Version: 0.3.15
+Version: 0.3.16
 Author: Matt Campbell
 Maintainer: Matt Campbell <mjcampbell74@gmail.com>
 Description: datapointsr provides a standard format for presenting statistical results. You can present the content in long or wide formats and apply SQL style filters to look at your statistical summaries. Data Points is intended to automate the work needed to explore a dataset or to do QC analysis.
