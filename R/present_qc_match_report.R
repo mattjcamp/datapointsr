@@ -14,23 +14,7 @@ present_qc_match_report <- function(dc, qc_title = ""){
     stop("dc must be a compare_datapoints object")
 
   library(stringr)
-
-  dataframe.as.html <- function(df){
-
-    if (!is.null(df)) {
-
-      library(knitr)
-      html_table <- kable(df, format = "html")
-
-    } else {
-
-      html_table <- ""
-
-    }
-
-    html_table
-
-  }
+  library(knitr)
 
   # TEST THREE LEVELS OF MATCHING
 
@@ -51,7 +35,7 @@ present_qc_match_report <- function(dc, qc_title = ""){
 
     if (!cat.meta.match$match) {
 
-      tab <- dataframe.as.html(cat.meta.match$Category_Comparison)
+      tab <- kable(cat.meta.match$Category_Comparison, format = "html")
       html <- sprintf("%s<strong>Category Meta Data is Mismatched</strong><br>%s", html, tab)
 
     } else {
@@ -65,7 +49,7 @@ present_qc_match_report <- function(dc, qc_title = ""){
           d <- cat.match$in_f_but_not_q
           d <- d[, 1:length(names(d)) - 1]
 
-          tab <- dataframe.as.html(head(d))
+          tab <- kable(head(d), format = "html")
           html <- sprintf("%s<strong>Top 5 Categories Present In F But Not Q</strong><br>%s", html,tab)
         }
 
@@ -74,7 +58,7 @@ present_qc_match_report <- function(dc, qc_title = ""){
           d <- cat.match$in_q_but_not_f
           d <- d[, 1:length(names(d)) - 1]
 
-          tab <- dataframe.as.html(head(d))
+          tab <- kable(head(d), format = "html")
           html <- sprintf("%s<strong>Top 5 Categories Present In Q But Not F</strong><br>%s", html,tab)
         }
 
@@ -87,7 +71,7 @@ present_qc_match_report <- function(dc, qc_title = ""){
           d <- filter(match$side_by_side_f_q, Match == FALSE)
 
 
-          tab <- dataframe.as.html(head(d))
+          tab <- kable(head(d), format = "html")
           html <- sprintf("%s<strong>Top 5 Mismatched Values </strong><br>%s", html,tab)
         }
 
@@ -119,10 +103,8 @@ present_qc_match_report <- function(dc, qc_title = ""){
     side_by_side_f_q$key_cat <- NULL
     side_by_side_f_q$key_cat_var <- NULL
 
-    tab <- dataframe.as.html(head(side_by_side_f_q))
+    tab <- kable(head(side_by_side_f_q, format = "html"))
     html <- sprintf("%s<strong>Random 5 Value Rows (Sanity Check) </strong><br>%s", html, tab)
-
-
 
   }
 
