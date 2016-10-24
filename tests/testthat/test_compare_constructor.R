@@ -6,14 +6,16 @@ source("make_test_datasets.R")
 dc <- compare_datapoints(f_long, q_long)
 
 test_that("compare_datapoints adds keys correctly", {
+
+  f <- as.data.frame(dc$f)
   n <- names(dc$f)
   expect_equal(length(n), 10)
   expect_equal(n[10], "key")
   expect_equal(n[9], "key_cat_var")
   expect_equal(n[8], "key_cat")
-  expect_equal(dc$f[1, 8], "-38.59175.736999Good")
-  expect_equal(dc$f[1, 9], "-38.59175.736999Gooddepth")
-  expect_equal(dc$f[1, 10], "-38.59175.736999Gooddepth162.0")
+  expect_equal(f[1, 8], "-38.59175.736999Good")
+  expect_equal(f[1, 9], "-38.59175.736999Gooddepth")
+  expect_equal(f[1, 10], "-38.59175.736999Gooddepth162.0")
 })
 
 check.cat <- check_categories_meta(dc)

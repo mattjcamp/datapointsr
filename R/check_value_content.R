@@ -9,13 +9,10 @@
 
 check_value_content <- function(dc){
 
-  library(reshape)
   library(dplyr)
   library(sqldf)
 
   me <- list()
-
-  # CHECK dc CLASS
 
   if (!"compare_datapoints" %in% class(dc))
     stop("dc must be compare_datapoints object")
@@ -37,19 +34,19 @@ check_value_content <- function(dc){
     # CHECK FOR DUPLICATES
 
     fkey <- f$key
-    if (length(fkey) != length(unique(fkey))){
+    if (length(fkey) != length(unique(fkey))) {
       print("WARNING: f datapoints has duplicate rows")
       f <- distinct(f)
     }
     qkey <- q$key
-    if (length(qkey) != length(unique(qkey))){
+    if (length(qkey) != length(unique(qkey))) {
       print("WARNING: q datapoints has duplicate rows")
       q <- distinct(q)
     }
 
     # CHECK FOR MATCHING CONTENT
 
-    common_keys <- sqldf::sqldf("
+    common_keys <- sqldf("
 
       SELECT F.key
       FROM f F
@@ -87,13 +84,11 @@ check_value_content <- function(dc){
         mutate(Diff = as.numeric(value_F) - as.numeric(value_Q)) %>%
         mutate(Match = ifelse(value_F == value_Q, TRUE, FALSE))
 
-      me$side_by_side_f_q <- side_by_side_f_q
+      me$side_by_side_f_q <- tbl_df(side_by_side_f_q)
 
     }
 
   }
-
-  class(me) <- append(class(me),"check_value_content")
 
   me
 

@@ -16,26 +16,22 @@
 datapoints <- function(df,
                        category.cols){
 
-  library(reshape)
-  library(dplyr)
+  library(data.table)
 
-  # CONSTRUCTOR
-
-  d <- as.data.frame(df)
-
+  d <- as.data.table(df)
   num_columns <- length(names(d))
   all.cols <- 1:num_columns
   measure.vars <- all.cols[!all.cols %in% category.cols]
 
-  d <- reshape::melt(data = d,
-                     id.vars = category.cols,
-                     measure.vars = measure.vars)
+  d <- melt(data = d,
+            id.vars = category.cols,
+            measure.vars = measure.vars)
 
   names(d)[length(d) - 1] <- "variable"
   names(d)[length(d)] <- "value"
 
-  class(d) <- append(class(d),"datapoints")
+  library(dplyr)
 
-  d
+  tbl_df(as.data.frame(d))
 
 }

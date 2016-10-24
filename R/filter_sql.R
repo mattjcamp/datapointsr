@@ -16,9 +16,7 @@
 
 filter_sql <- function(d, filter){
 
-  library(reshape)
   library(coderr)
-  library(datapointsr)
   library(sqldf)
 
   if ("compare_datapoints" %in% class(d)) {

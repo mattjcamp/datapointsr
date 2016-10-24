@@ -9,15 +9,10 @@
 
 check_categories_meta <- function(dc){
 
-  library(reshape)
   library(dplyr)
   library(compare)
 
   me <- list()
-
-  # MAKE SURE dc IS IN THE EXPECTED FORMAT
-
-  # CHECK CLASS
 
   if (!"compare_datapoints" %in% class(dc))
     stop("dc must be compare_datapoints object")
@@ -28,7 +23,7 @@ check_categories_meta <- function(dc){
   len_f <- length(names(dc$f)) - 4
   len_q <- length(names(dc$q)) - 4
   len <- len_f
-  
+
   f_c <- sapply(dc$f, class)[1:len_f]
   q_c <- sapply(dc$q, class)[1:len_f]
   test2 <- compare(f_c, q_c)
@@ -67,14 +62,11 @@ check_categories_meta <- function(dc){
                            COL_Q = names.q,
                            CLASS_F = f_c[1:len],
                            CLASS_Q = q_c[1:len]))
-      # d <- d %>% mutate(MATCH = COL_F == COL_Q & MODE_F == MODE_Q & CLASS_F == CLASS_Q)
       me$Category_Comparison <- d
 
     }
 
   }
-
-  class(me) <- append(class(me),"check_categories_meta")
 
   me
 

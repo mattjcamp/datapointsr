@@ -9,6 +9,6 @@ check.val <- check_value_content(dc)
 
 test_that("check_value_content finds value content mismatches", {
   expect_equal(check.val$match$result, FALSE)
-  expect_equal(check.val$side_by_side_f_q[1,8], FALSE)
+  expect_equal(as.data.frame(check.val$side_by_side_f_q)[1,8], FALSE)
 })
 

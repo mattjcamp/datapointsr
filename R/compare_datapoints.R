@@ -27,7 +27,7 @@
 
 compare_datapoints <- function(f, q){
 
-  library(reshape)
+  # library(reshape)
   library(dplyr)
 
   me <- list()
@@ -35,13 +35,6 @@ compare_datapoints <- function(f, q){
   # MAKE SURE BOTH DATAPOINTS ARE IN THE EXPECTED FORMAT
 
   verify.datapoints.format <- function(ds) {
-
-    # # CHECK CLASS
-    #
-    # if (!"datapoints" %in% class(ds))
-    #   stop("Both f and q must be datapoints objects")
-
-    # CHECK COLUMN NAMES
 
     ds_len <- length(names(ds))
     if (names(ds)[ds_len] != "value")
@@ -120,8 +113,8 @@ compare_datapoints <- function(f, q){
 
   # PACKAGE AND RETURN
 
-  me$f <- f
-  me$q <- q
+  me$f <- tbl_df(as.data.frame(f))
+  me$q <- tbl_df(as.data.frame(q))
 
   class(me) <- append(class(me),"compare_datapoints")
 

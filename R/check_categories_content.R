@@ -9,7 +9,6 @@
 
 check_categories_content <- function(dc){
 
-  library(reshape)
   library(dplyr)
   library(sqldf)
   library(coderr)
@@ -44,8 +43,8 @@ check_categories_content <- function(dc){
       dups <- sqldf("SELECT key_cat_var from dups WHERE N > 1")
       dups <- filter(f, key_cat_var %in% dups$key_cat_var)
       num_var <- length(names(f)) - 3
-      me$dupsf <-  sqldf(sprintf("SELECT %s FROM dups",
-                                 code_vector_to_csv_list(names(f)[1:num_var], FALSE, FALSE)))
+      me$dupsf <-  tbl_df(sqldf(sprintf("SELECT %s FROM dups",
+                                        code_vector_to_csv_list(names(f)[1:num_var], FALSE, FALSE))))
 
     }
 
@@ -56,8 +55,8 @@ check_categories_content <- function(dc){
       dups <- sqldf("SELECT key_cat_var from dups WHERE N > 1")
       dups <- filter(q, key_cat_var %in% dups$key_cat_var)
       num_var <- length(names(q)) - 3
-      me$dupsq <-  sqldf(sprintf("SELECT %s FROM dups",
-                                 code_vector_to_csv_list(names(q)[1:num_var], FALSE, FALSE)))
+      me$dupsq <-  tbl_df(sqldf(sprintf("SELECT %s FROM dups",
+                                        code_vector_to_csv_list(names(q)[1:num_var], FALSE, FALSE))))
 
     }
 
@@ -85,14 +84,12 @@ check_categories_content <- function(dc){
       me$match <- FALSE
       col.len <- length(names(f)) - 3
       if (nrow_q > 0)
-        me$in_q_but_not_f <- in_q_but_not_f[, 1:col.len]
+        me$in_q_but_not_f <- tbl_df(in_q_but_not_f[, 1:col.len])
       if (nrow_f > 0)
-        me$in_f_but_not_q <- in_f_but_not_q[, 1:col.len]
+        me$in_f_but_not_q <- tbl_df(in_f_but_not_q[, 1:col.len])
     }
 
   }
-
-  class(me) <- append(class(me),"check_categories_content")
 
   me
 
