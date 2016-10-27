@@ -12,16 +12,6 @@ wide(dp)
 \description{
 Returns a dataset in a wide format
 }
-\examples{
-
-USE WIDE WITH DATAPOINTS
-
-datapoints(quakes, c(1,2,5)) \%>\%
-wide() \%>\%
-head()
-
-
-}
 \keyword{QC}
 \keyword{dataset,}
 \keyword{utility,}
