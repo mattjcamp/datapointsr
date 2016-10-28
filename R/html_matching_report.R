@@ -15,18 +15,18 @@ html_matching_report <- function(dp, qc_title = ""){
 
   # TEST THREE LEVELS OF MATCHING
 
-  match <- match_values(dp)
+  values <- match_values(dp)
 
-  if (match$equal) {
+  if (values$equal) {
 
     # PUT SUCCESS TEXT HERE
 
     html <- sprintf("<div id = 'status_passed'><strong><big><big>%s</big></big></strong><br>", qc_title)
-    html <- sprintf("%s<strong>Values are 100% Matched</strong><br>", html)
+    html <- sprintf("%s<strong>Values are matched</strong><br>", html)
     v <- 1:nrow(dp$f)
     s <- sample(v, 15, replace = TRUE)
-    match <- show_values(dp)
-    tab <- knitr::kable(match$d[s,], format = "html")
+    values <- show_values(dp)
+    tab <- knitr::kable(values$d[s,], format = "html")
     html <- sprintf("%s<strong>Sanity Check: Randomly Selected Values </strong><br>%s", html, tab)
     html <- sprintf("%s</div>", html)
 
@@ -35,10 +35,10 @@ html_matching_report <- function(dp, qc_title = ""){
     # PUT SUCCESS TEXT HERE
 
     html <- sprintf("<div id = 'status_failed'><strong><big><big>%s</big></big></strong><br>", qc_title)
-    html <- sprintf("%s<strong>Values are Not Matching</strong><br>", html)
-    match <- show_values(dp)
-    tab <- knitr::kable(head(match$mis_matched), format = "html")
-    html <- sprintf("%s<strong>Check out these mismatched values </strong><br>%s", html, tab)
+    html <- sprintf("%s<strong>Values are Not valuesing</strong><br>", html)
+    values <- show_values(dp)
+    tab <- knitr::kable(head(values$mis_valuesed), format = "html")
+    html <- sprintf("%s<strong>Check out these misvaluesed values </strong><br>%s", html, tab)
     html <- sprintf("%s</div>", html)
 
   }

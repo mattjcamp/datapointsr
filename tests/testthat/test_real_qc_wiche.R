@@ -99,4 +99,13 @@ test_that("html_matching_report works", {
 
   html <- html_matching_report(dp)
 
+  load("f_matched.rdata")
+  load("q_matched.rdata")
+
+  dp <- data_points(f_matched, q_matched)
+  values <- match_values(dp)
+  expect_true(values$equal)
+
+  html <- html_matching_report(dp)
+
 })
