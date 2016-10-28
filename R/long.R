@@ -9,9 +9,23 @@
 #' @export
 #' @examples
 
-as.data.points <- function(df,
-                           category_cols){
+long <- function(df, category_cols){
 
-  long(df, category_cols)
+  d <- data.table::as.data.table(df)
+  num_columns <- length(names(d))
+  all.cols <- 1:num_columns
+  measure.vars <- all.cols[!all.cols %in% category_cols]
+
+  d <- data.table::melt(data = d,
+                        id.vars = category_cols,
+                        measure.vars = measure.vars)
+
+  names(d)[length(d) - 1] <- "variable"
+  names(d)[length(d)] <- "value"
+
+  d <- tibble::as_tibble(as.data.frame(d))
+  d$variable <- as.character(d$variable)
+
+  d
 
 }

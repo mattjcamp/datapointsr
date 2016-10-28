@@ -7,12 +7,10 @@
 filter(d, ...)
 }
 \arguments{
-\item{d}{data points, compare_datapoints or dataframe object}
+\item{d}{data points or dataframe}
 }
 \description{
 Filters data points
 }
-\keyword{QC}
-\keyword{dataset,}
-\keyword{utility,}
+\keyword{dataset}
 

@@ -1,6 +1,5 @@
-#' Is a Data Frame in Data Points Format?
+#' Is Data Frame in Data Points Format?
 #'
-#' Makes it easier to look at datasets by putting a statistical table into a common format
 #' @description Check to see if the last two columns are always a named variable and value.
 #' variable is a character type and would be a column header in a tidy dataframe. The preceding
 #' columns are all categories that you can select from.

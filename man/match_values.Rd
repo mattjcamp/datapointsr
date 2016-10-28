@@ -2,7 +2,7 @@
 % Please edit documentation in R/match_values.R
 \name{match_values}
 \alias{match_values}
-\title{Check All Content}
+\title{Check All Values}
 \usage{
 match_values(dp)
 }
@@ -12,7 +12,6 @@ match_values(dp)
 \description{
 Compares the rows of values in two datapoints
 }
-\keyword{QC}
-\keyword{dataset,}
-\keyword{utility,}
+\keyword{QC,}
+\keyword{matching}
 

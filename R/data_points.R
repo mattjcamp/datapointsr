@@ -1,5 +1,5 @@
 
-#' Data Points
+#' Look at Two Sets of Data Points
 #'
 #' Returns an object that holds two datasets in data points format, use
 #' with functions that compare datapoints
@@ -16,12 +16,10 @@ data_points <- function(f, q){
   if (!(is.data.points(f) & is.data.points(q)))
     stop("data_points: Both f and q must be in data.points format")
 
-  # PACKAGE AND RETURN
-
   me$f <- f
   me$q <- q
 
-  class(me) <- append(class(me),"data.points")
+  class(me) <- append(class(me), "data.points")
 
   me
 

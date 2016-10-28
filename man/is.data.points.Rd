@@ -2,7 +2,7 @@
 % Please edit documentation in R/is.data.points.R
 \name{is.data.points}
 \alias{is.data.points}
-\title{Is a Data Frame in Data Points Format?}
+\title{Is Data Frame in Data Points Format?}
 \usage{
 is.data.points(df)
 }
@@ -13,9 +13,6 @@ is.data.points(df)
 Check to see if the last two columns are always a named variable and value.
 variable is a character type and would be a column header in a tidy dataframe. The preceding
 columns are all categories that you can select from.
-}
-\details{
-Makes it easier to look at datasets by putting a statistical table into a common format
 }
 \keyword{QC,}
 \keyword{matching}

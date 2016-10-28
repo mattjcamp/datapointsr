@@ -1,4 +1,4 @@
-#' Present Results of a Value Match
+#' Present Results of a Match
 #'
 #' Returns a HTML formated report detailing the results of a QC Match
 #' Analysis
@@ -8,16 +8,16 @@
 #' @export
 #' @examples
 
-report_match_values <- function(dp, qc_title = ""){
+html_matching_report <- function(dp, qc_title = ""){
 
   if (!"data.points" %in% class(dp))
-    stop("match_category_content: dp must be data.points object")
+    stop("html_matching_report: dp must be data.points object")
 
   # TEST THREE LEVELS OF MATCHING
 
   match <- match_values(dp)
 
-  if (match$match$equal) {
+  if (match$equal) {
 
     # PUT SUCCESS TEXT HERE
 
@@ -25,7 +25,8 @@ report_match_values <- function(dp, qc_title = ""){
     html <- sprintf("%s<strong>Values are 100% Matched</strong><br>", html)
     v <- 1:nrow(dp$f)
     s <- sample(v, 15, replace = TRUE)
-    tab <- knitr::kable(match$side_by_side_f_q[s,], format = "html")
+    match <- show_values(dp)
+    tab <- knitr::kable(match$d[s,], format = "html")
     html <- sprintf("%s<strong>Sanity Check: Randomly Selected Values </strong><br>%s", html, tab)
     html <- sprintf("%s</div>", html)
 
@@ -35,13 +36,12 @@ report_match_values <- function(dp, qc_title = ""){
 
     html <- sprintf("<div id = 'status_failed'><strong><big><big>%s</big></big></strong><br>", qc_title)
     html <- sprintf("%s<strong>Values are Not Matching</strong><br>", html)
+    match <- show_values(dp)
     tab <- knitr::kable(head(match$mis_matched), format = "html")
     html <- sprintf("%s<strong>Check out these mismatched values </strong><br>%s", html, tab)
     html <- sprintf("%s</div>", html)
 
-
   }
-
 
   html
 

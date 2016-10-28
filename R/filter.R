@@ -2,8 +2,8 @@
 #' Filter
 #'
 #' Filters data points
-#' @param d data points, compare_datapoints or dataframe object
-#' @keywords dataset, utility, QC
+#' @param d data points or dataframe
+#' @keywords dataset
 #' @export
 #' @examples
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_points.R
 \name{data_points}
 \alias{data_points}
-\title{Data Points}
+\title{Look at Two Sets of Data Points}
 \usage{
 data_points(f, q)
 }
