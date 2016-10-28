@@ -32,7 +32,7 @@ syntax that includes easy to remember verbs.
 
 ## Data Points Format
 
-  - **Categories** fields that define categories that you can filter on
+  - **Category** fields that define categories that you can filter on
   - **variable** the original measure (mean, n, etc)
   - **value** the value of the measure
 
