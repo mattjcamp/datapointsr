@@ -13,7 +13,7 @@ of data points.
 ## Data Points and Tidy Data
 
 Data points is heavily influenced by the [Tidyverse](https://github.com/tidyverse/tidyverse).
-A key componement of the tidyverse is *tidy dataset*,
+A key componement of the tidyverse is the *tidy dataset*,
 
 >Tidy datasets are easy to manipulate, model and visualise, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.<br>
 >[*Tidy Data*](http://vita.had.co.nz/papers/tidy-data.pdf), Hadley Wickham
