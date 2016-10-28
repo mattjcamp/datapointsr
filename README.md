@@ -1,39 +1,32 @@
-# datapointsr
+# Data Points
 
-**datapointsr** makes it easy to switch between long and wide format statistical summaries.
+Data points makes it easy to look at statistical tables. Data in
+a statistical table is the end result of an analysis. Statistical
+tables usally contain descriptive statistics or even just counts
+of things in a group.
 
-When I do QC Analysis I'm have to verify the contents of statistical summaries by doing an exact 1:1 match. To identify mismatched data points I usually need to melt both my own table and the the content that I am inspecting. This is a pain.
+Data points melts statistical tables into a long format so it's
+easy to do an exact comparison between two sets of data points. This
+is helpful when you are looking for differences between two sets
+of data points.
 
-So, what I do now is put the data into a melted format that is easily to inspect with 
-DataPoints. The format is: 
+## Data Points Format
 
-  - **Category** fields (used to filter data points)
-  - **variable** (the name of the original measure or data table column name)
-  - **value** (the statistic I need to verify)
+  - **Categories** 
+  - **variable** the original measure (mean, n, etc)
+  - **value** the value of the measure
 
-With the statisical summary in a standard format, I can easily find what data points 
-don't match. Also, it's easy to look at data points in a wide format (where each summary 
-statistic gets it's own column). This makes some analysis, dashboard input and visualization 
-easier.
-
-The idea is that you would start the workflow by building a DataPoints object with the 
-dataframe and category specifications. This object will maintain the full dataset in a long
-format (the variable, value combination that comes from `reshape`). This would work as normal 
-with  the `dplyr` verbs like `select()` and `filter()`. I would also want to define these 
-new verbs specifically for DataPoints:
-
-- `sql_filter()` 
-- `wide()`
+## Data Points and Tidy Data
 
 ## QC Analysis Workflow
 
-The first application of DataPoints is QC Analysis. The workflow is to ingest the 
+One of the applications of data points is QC Analysis. The workflow is to ingest the 
 dataset to be QC'ed named `f` (for fulfiller). Then I will attempt to build a reference
 dataset named `q` (for QC'er) that follows the same specifications that the fulfiller
 used.
 
 Once you have these datasets, you use them to create two datapoints objects. Then you 
-create a `compare_datapoints` object with the `f` and `q` datapoints. This is the
+create a `data_points` object with the `f` and `q` data points. This is the
 object that you will test. You can look to see if the expected categories are in place
 and in the right format. You can also tests if the values in both datasets match.
 
@@ -48,16 +41,23 @@ Here is how to see if two sets of categories match up using datapoints using the
     q <- quakes
     
     # BUILD THE DATAPOINTS OBJECTS
-    f <- datapoints(f, c(1,2,5))
-    q <- datapoints(q, c(1,2,5))
+    f <- as.data.points(f, c(1,2,5))
+    q <- as.data.points(q, c(1,2,5))
     
     # BUILD THE DATAPOINTS COMPARER OBJECT
     
-    dc <- compare_datapoints(f, q)
+    dp <- data_points(f, q)
     
-    # CHECK CATEGORY METADATA TO SEE IF THEY BOTH MATCH
+    # CHECK TO SEE IF THEY MATCH
     
-    check_categories_meta(dc)$match
+    match_categories(dp)
 
-This would report back `TRUE`. If you don't specify the list member that you want you will
+This would report back `Equal`. If you don't specify the list member that you want you will
 get more information.
+
+You can also look more closely at the result:
+
+    show_categories(dp)
+    
+This can be done for categories, category metadata and values.
+  

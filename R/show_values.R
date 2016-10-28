@@ -40,6 +40,9 @@ show_values <- function(dp){
 
   me$match <- testthat::compare(f, q)
 
+  me$summary_f <- summary(dc$f)
+  me$summary_q <- summary(dc$q)
+
   me$d <-
     inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
     mutate(diff = value.x - value.y,
