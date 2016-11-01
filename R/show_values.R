@@ -43,15 +43,30 @@ show_values <- function(dp){
   me$summary_f <- summary(dp$f)
   me$summary_q <- summary(dp$q)
 
-  me$d <-
-    inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
-    mutate(diff = value.x - value.y,
-           match = ifelse(diff > 0, "n", "y"))
+  if (is.numeric(f$value) & is.numeric(q$value)) {
 
-  mis_matched <- dplyr::filter(me$d, match == "n")
-  if (nrow(mis_matched) > 0)
-    me$mis_matched <- mis_matched
+    me$d <-
+      inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
+      mutate(diff = value.x - value.y,
+             match = ifelse(diff > 0, "n", "y"))
+  
+    mis_matched <- dplyr::filter(me$d, match == "n")
+    if (nrow(mis_matched) > 0)
+      me$mis_matched <- mis_matched
 
+  } else {
+
+    me$d <-
+      inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
+      mutate(diff = stringr::str_c(value.x, "::",  value.y),
+             match = ifelse(value.x != value.y, "n", "y"))
+  
+    mis_matched <- dplyr::filter(me$d, match == "n")
+    if (nrow(mis_matched) > 0)
+      me$mis_matched <- mis_matched
+        
+  }
+  
   me
 
 }
