@@ -1,10 +1,10 @@
 Package: datapointsr
 Type: Package
-Title: DataPoints
-Version: 0.4.5
+Title: Data Points
+Version: 0.4.6
 Author: Matt Campbell
 Maintainer: Matt Campbell <mjcampbell74@gmail.com>
-Description: datapointsr provides a standard format for presenting statistical results. You can present the content in long or wide formats and apply SQL style filters to look at your statistical summaries. Data Points is intended to automate the work needed to explore a dataset or to do QC analysis.
+Description: A data grammer that gives you a laser-like ability to compare and contrast datasets
 License: None
 LazyData: TRUE
 RoxygenNote: 5.0.1
