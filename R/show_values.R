@@ -48,7 +48,7 @@ show_values <- function(dp){
     me$d <-
       inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
       mutate(diff = value.x - value.y,
-             match = ifelse(diff > 0, "n", "y"))
+             match = ifelse(diff != 0, "n", "y"))
   
     mis_matched <- dplyr::filter(me$d, match == "n")
     if (nrow(mis_matched) > 0)
