@@ -16,8 +16,8 @@ data_points <- function(f, q){
   if (!(is.data.points(f) & is.data.points(q)))
     stop("data_points: Both f and q must be in data.points format")
 
-  me$f <- f
-  me$q <- q
+  me$f <- tibble::as_tibble(f)
+  me$q <- tibble::as_tibble(q)
 
   class(me) <- append(class(me), "data.points")
 
