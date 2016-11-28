@@ -21,15 +21,17 @@ show_variables <- function(dp){
   f <- dp$f[, 1:l]
   q <- dp$q[, 1:l]
 
-  f <- f %>%
+  f <- 
+    f %>%
     dplyr::distinct() %>%
-    dplyr::arrange_(names(f))
+    dplyr::arrange_(.dots = names(f))
 
-  q <- q %>%
+  q <- 
+    q %>%
     dplyr::distinct() %>%
-    dplyr::arrange_(names(f))
+    dplyr::arrange_(.dots = names(q))
 
-  match <- testthat::compare(f,q)
+  match <- testthat::compare(f, q)
 
   in_f <- dplyr::setdiff(f, q)
   in_q <- dplyr::setdiff(q, f)

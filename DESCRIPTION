@@ -1,7 +1,7 @@
 Package: datapointsr
 Type: Package
 Title: A data grammer that gives you a laser-like ability to compare and contrast datasets
-Version: 0.4.8
+Version: 0.4.9
 Author: Matt Campbell
 Maintainer: Matt Campbell <mjcampbell74@gmail.com>
 Description: A data grammer that gives you a laser-like ability to compare and contrast datasets
