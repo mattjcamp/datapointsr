@@ -32,12 +32,12 @@ html_matching_report <- function(dp, qc_title = ""){
 
   } else {
 
-    # PUT SUCCESS TEXT HERE
+    # PUT FAILURE TEXT HERE
 
     html <- sprintf("<div id = 'status_failed'><strong><big><big>%s</big></big></strong><br>", qc_title)
-    html <- sprintf("%s<strong>Values are Not valuesing</strong><br>", html)
+    html <- sprintf("%s<strong>These datasets are not matching</strong><br>", html)
     values <- show_values(dp)
-    tab <- knitr::kable(head(values$mis_valuesed), format = "html")
+    tab <- knitr::kable(head(values$mis_matched), format = "html")
     html <- sprintf("%s<strong>Check out these misvaluesed values </strong><br>%s", html, tab)
     html <- sprintf("%s</div>", html)
 

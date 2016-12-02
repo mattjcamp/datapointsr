@@ -31,6 +31,11 @@ show_values <- function(dp){
   if (!match_cat$equal)
     stop("show_values: Categories must match before you can try to match values.")
 
+  # VERIFY VALUE METADATA
+
+  if (class(f$value) != class(q$value))
+    stop("show_values: Value metadata must match before attempting to match values.")
+
   f <-
     f %>%
     arrange_(names(f))
@@ -48,8 +53,10 @@ show_values <- function(dp){
     me$d <-
       inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
       mutate(diff = value.x - value.y,
-             match = ifelse(diff != 0, "n", "y"))
-  
+             match = ifelse(diff != 0, "n", "y")) %>%
+      rename(f_value = value.x,
+             q_value = value.y)
+
     mis_matched <- dplyr::filter(me$d, match == "n")
     if (nrow(mis_matched) > 0)
       me$mis_matched <- mis_matched
@@ -59,14 +66,16 @@ show_values <- function(dp){
     me$d <-
       inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
       mutate(diff = stringr::str_c(value.x, "::",  value.y),
-             match = ifelse(value.x != value.y, "n", "y"))
-  
+             match = ifelse(value.x != value.y, "n", "y")) %>%
+      rename(f_value = value.x,
+             q_value = value.y)
+
     mis_matched <- dplyr::filter(me$d, match == "n")
     if (nrow(mis_matched) > 0)
       me$mis_matched <- mis_matched
-        
+
   }
-  
+
   me
 
 }
