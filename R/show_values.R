@@ -38,10 +38,10 @@ show_values <- function(dp){
 
   f <-
     f %>%
-    arrange_(names(f))
+    dplyr::arrange_(names(f))
   q <-
     q %>%
-    arrange_(names(q))
+    dplyr::arrange_(names(q))
 
   me$match <- testthat::compare(f, q)
 
@@ -51,11 +51,11 @@ show_values <- function(dp){
   if (is.numeric(f$value) & is.numeric(q$value)) {
 
     me$d <-
-      inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
-      mutate(diff = value.x - value.y,
-             match = ifelse(diff != 0, "n", "y")) %>%
-      rename(f_value = value.x,
-             q_value = value.y)
+      dplyr::inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
+      dplyr::mutate(diff = value.x - value.y,
+                    match = ifelse(diff != 0, "n", "y")) %>%
+      dplyr::rename(f_value = value.x,
+                    q_value = value.y)
 
     mis_matched <- dplyr::filter(me$d, match == "n")
     if (nrow(mis_matched) > 0)
@@ -64,11 +64,11 @@ show_values <- function(dp){
   } else {
 
     me$d <-
-      inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
-      mutate(diff = stringr::str_c(value.x, "::",  value.y),
-             match = ifelse(value.x != value.y, "n", "y")) %>%
-      rename(f_value = value.x,
-             q_value = value.y)
+      dplyr::inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
+      dplyr::mutate(diff = stringr::str_c(value.x, "::",  value.y),
+                    match = ifelse(value.x != value.y, "n", "y")) %>%
+      dplyr::rename(f_value = value.x,
+                    q_value = value.y)
 
     mis_matched <- dplyr::filter(me$d, match == "n")
     if (nrow(mis_matched) > 0)
