@@ -17,17 +17,29 @@ show_categories <- function(dp){
   if (!match_meta$equal)
     stop(sprintf("show_categories: Category metadata must match before you can try to match category content."))
 
-  l <- length(names(dp$f)) - 2
-  f <- dp$f[, 1:l]
-  q <- dp$q[, 1:l]
+  l_f <- length(names(dp$f)) - 2
+  l_q <- length(names(dp$q)) - 2
 
-  f <- f %>%
-    dplyr::distinct() %>%
-    dplyr::arrange_(names(f))
+  f <- 
+    dp$f[, 1:l_f] %>% 
+    ungroup()
+  
+  q <- 
+    dp$q[, 1:l_q] %>% 
+    ungroup()
 
-  q <- q %>%
+  n_f <- names(f)
+  n_q <- names(q)
+  
+  f <-
+    f %>%
     dplyr::distinct() %>%
-    dplyr::arrange_(names(f))
+    dplyr::arrange_(n_f)
+
+  q <- 
+    q %>%
+    dplyr::distinct() %>%
+    dplyr::arrange_(n_q)
 
   match <- testthat::compare(f,q)
 
