@@ -13,45 +13,46 @@ show_categories <- function(dp){
     stop("show_categories: dp must be data.points object")
 
   match_meta <- match_category_metadata(dp)
-
   if (!match_meta$equal)
-    stop(sprintf("show_categories: Category metadata must match before you can try to match category content."))
+    me$message <- "show_categories: Categories metadata must match before you can match value content"
+  else {
 
-  l_f <- length(names(dp$f)) - 2
-  l_q <- length(names(dp$q)) - 2
+    l_f <- length(names(dp$f)) - 2
+    l_q <- length(names(dp$q)) - 2
 
-  f <- 
-    dp$f[, 1:l_f] %>% 
-    ungroup()
-  
-  q <- 
-    dp$q[, 1:l_q] %>% 
-    ungroup()
+    f <-
+      dp$f[, 1:l_f] %>%
+      ungroup()
 
-  n_f <- names(f)
-  n_q <- names(q)
-  
-  f <-
-    f %>%
-    dplyr::distinct() %>%
-    dplyr::arrange_(n_f)
+    q <-
+      dp$q[, 1:l_q] %>%
+      ungroup()
 
-  q <- 
-    q %>%
-    dplyr::distinct() %>%
-    dplyr::arrange_(n_q)
+    n_f <- names(f)
+    n_q <- names(q)
 
-  match <- testthat::compare(f,q)
+    f <-
+      f %>%
+      dplyr::distinct() %>%
+      dplyr::arrange_(n_f)
 
-  in_f <- dplyr::setdiff(f, q)
-  in_q <- dplyr::setdiff(q, f)
+    q <-
+      q %>%
+      dplyr::distinct() %>%
+      dplyr::arrange_(n_q)
 
-  me <- list()
-  me$match <- match
-  if (nrow(in_f) > 0)
-    me$in_f <- in_f
-  if (nrow(in_q) > 0)
-    me$in_q <- in_q
+    match <- testthat::compare(f,q)
+
+    in_f <- dplyr::setdiff(f, q)
+    in_q <- dplyr::setdiff(q, f)
+
+    me <- list()
+    me$match <- match
+    if (nrow(in_f) > 0)
+      me$in_f <- in_f
+    if (nrow(in_q) > 0)
+      me$in_q <- in_q
+  }
 
   me
 

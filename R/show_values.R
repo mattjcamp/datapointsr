@@ -7,72 +7,53 @@
 #' @export
 #' @examples
 
-show_values <- function(dp){
+show_values  <- function(dp){
+
+  if (!"data.points" %in% class(dp))
+    stop("show_categories: dp must be data.points object")
 
   me <- list()
 
-  if (!"data.points" %in% class(dp))
-    stop("show_values: dp must be data.points object")
-
-  f <- dp$f
-  q <- dp$q
-
-  # VERIFY META DATA
-
-  match_meta <- match_category_metadata(dp)
-
-  if (!match_meta$equal)
-    stop("show_values: Category metadata must match before you can try to match categories")
-
-  # VERIFY CATEGORIES
-
   match_cat <- match_categories(dp)
-
   if (!match_cat$equal)
-    stop("show_values: Categories must match before you can try to match values.")
+    me$message <- "show_variables: Categories must match before you can match value content"
+  else {
 
-  # VERIFY VALUE METADATA
+    f <- dp$f
+    q <- dp$q
 
-  if (class(f$value) != class(q$value))
-    stop("show_values: Value metadata must match before attempting to match values.")
+    library(tidyverse)
 
-  f <-
-    f %>%
-    dplyr::arrange_(names(f))
-  q <-
-    q %>%
-    dplyr::arrange_(names(q))
+    n <- length(names(f)) - 1
+    n <- names(f)[1:n]
 
-  me$match <- testthat::compare(f, q)
+    common <- inner_join(f, q, by = n) %>%
+      mutate(in_dataset = "common") %>%
+      select(in_dataset, everything()) %>%
+      rename(value.f = value.x,
+             value.q = value.y)
 
-  me$summary_f <- summary(dp$f)
-  me$summary_q <- summary(dp$q)
+    only_in_f <- anti_join(f, q, by = n) %>%
+      mutate(in_dataset = "only_in_f") %>%
+      select(in_dataset, everything()) %>%
+      rename(value.f = value) %>%
+      mutate(value.q = NA)
 
-  if (is.numeric(f$value) & is.numeric(q$value)) {
+    only_in_q <- anti_join(q, f, by = n) %>%
+      mutate(in_dataset = "only_in_q",
+             value.f = NA) %>%
+      rename(value.q = value) %>%
+      select(in_dataset, everything(), value.f, value.q)
 
-    me$d <-
-      dplyr::inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
-      dplyr::mutate(diff = value.x - value.y,
-                    match = ifelse(diff != 0, "n", "y")) %>%
-      dplyr::rename(f_value = value.x,
-                    q_value = value.y)
+    d <- bind_rows(common, only_in_f, only_in_q) %>%
+      mutate(match = value.f == value.q)
 
-    mis_matched <- dplyr::filter(me$d, match == "n")
-    if (nrow(mis_matched) > 0)
-      me$mis_matched <- mis_matched
+    match <- testthat::compare(f, q)
 
-  } else {
+    me$match <- match
+    me$d <- d
 
-    me$d <-
-      dplyr::inner_join(f, q, names(f)[1:length(names(f)) - 1]) %>%
-      dplyr::mutate(diff = stringr::str_c(value.x, "::",  value.y),
-                    match = ifelse(value.x != value.y, "n", "y")) %>%
-      dplyr::rename(f_value = value.x,
-                    q_value = value.y)
-
-    mis_matched <- dplyr::filter(me$d, match == "n")
-    if (nrow(mis_matched) > 0)
-      me$mis_matched <- mis_matched
+    me
 
   }
 

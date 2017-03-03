@@ -15,7 +15,7 @@ match_categories <- function(dp){
   match_meta <- match_category_metadata(dp)
 
   if (!match_meta$equal)
-    stop(sprintf("match_categories: Category metadata must match before you can try to match category content."))
+    print(sprintf("match_categories: Category metadata must match before you can try to match category content."))
 
   l <- length(names(dp$f)) - 2
   f <- dp$f[, 1:l]

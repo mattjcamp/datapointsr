@@ -11,6 +11,9 @@
 
 long <- function(df, category_cols){
 
+  if (!is.numeric(category_cols))
+    category_cols <- match(category_cols, names(df))
+
   d <- data.table::as.data.table(df)
   num_columns <- length(names(d))
   all.cols <- 1:num_columns

@@ -12,6 +12,6 @@ test_that("show_values table labels", {
   dp <- data_points(f_values, q_values)
   values <- show_values(dp)
 
-  expect_equal(names(values$d)[5], "f_value")
+  expect_equal(names(values$mis_matched)[5], "f_value")
 
 })

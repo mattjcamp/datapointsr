@@ -36,16 +36,7 @@ test_that("show_category_metadata works", {
 
 test_that("match_categories works", {
 
-  load("f.rdata")
   load("q.rdata")
-
-  f <-
-    f %>%
-    select(location, year, wiche_year, variable, value)
-
-  dp <- data_points(f, q)
-  expect_error(match_categories(dp))
-
   load("f.rdata")
   dp <- data_points(f, q)
   cat_content <- match_categories(dp)

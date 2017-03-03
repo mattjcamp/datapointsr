@@ -12,6 +12,5 @@ test_that("show_values", {
 
   dp <- data_points(f_matched, q_matched)
 
-  expect_error({d <- show_values(dp)})
 
 })
