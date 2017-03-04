@@ -35,7 +35,7 @@ analysis.
 
 Our job is to either create these statistical tables or to verify that these
 tables are correct. To verify that a statistical table is correct we need one
-analysis to independently create the table and then compare his or her results
+analyst to independently create the table and then compare his or her results
 to the table we are sending out.
 
 Comparing two wide tables with potentially hundreds of column and thousands of rows
@@ -113,4 +113,49 @@ original `d` object:
     
 >**NOTE** `f` means **fufiller analyst** and `q` means **QC analyst**
 
+We now have two similar, but not identical datasets. 
 
+### Put Datasets Into Datapoints Format
+
+To check this dataset, we need a 
+standard datapoints object. We will first need to make sure both
+datasets are in a long, normalized format. Use the `long` function
+to do this:
+
+    f <- f %>% long(1:3)
+    q <- q %>% long(1:3)
+
+Take a took at `f`:
+
+    head(f, 10)
+    
+    # A tibble: 10 × 5
+        year location count_all variable  value
+       <int>    <chr>     <int>    <chr>  <int>
+    1   2001       us   2850006 count_np 280806
+    2   2002       us   2910675 count_np 289141
+    3   2003       us   3019234 count_np 299314
+    4   2004       us   3059929 count_np 300041
+    5   2005       us   3095418 count_np 296168
+    6   2006       us   3115511 count_np 302099
+    7   2007       us   3196104 count_np 303059
+    8   2008      usa   3315437 count_np 314100
+    9   2009       us   3347948 count_np 308933
+    10  2010       us   3440691 count_np 312669
+
+Now, we can use these datasets in long format to 
+make a `datapoints` object:
+
+    dp <- data_points(f, q)
+
+This object can now used to test the two datasets. You can check the
+category metadata, just the categories in each or you can just check
+everything at once. Usually, you will attempt to check everything at
+once first using `show_values`:
+
+    t <- show_values(dp)
+    
+    t
+    
+    $message
+    [1] "show_variables: Categories must match before you can match value content"
