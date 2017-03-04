@@ -17,8 +17,8 @@ show_categories <- function(dp){
     me$message <- "show_categories: Categories metadata must match before you can match value content"
   else {
 
-    l_f <- length(names(dp$f)) - 2
-    l_q <- length(names(dp$q)) - 2
+    l_f <- length(names(dp$f)) - 1
+    l_q <- length(names(dp$q)) - 1
 
     f <-
       dp$f[, 1:l_f] %>%

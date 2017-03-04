@@ -122,8 +122,8 @@ standard datapoints object. We will first need to make sure both
 datasets are in a long, normalized format. Use the `long` function
 to do this:
 
-    f <- f %>% long(1:3)
-    q <- q %>% long(1:3)
+    f <- f %>% long(1:2)
+    q <- q %>% long(1:2)
 
 Take a took at `f`:
 
@@ -159,3 +159,93 @@ once first using `show_values`:
     
     $message
     [1] "show_variables: Categories must match before you can match value content"
+
+We can't match all the values yet because categories are not in sync. But, we 
+can look more closely at the categories to see what is happening by using the
+`show_categories` function:
+
+    show_categories(dp)
+    
+    $match
+    Rows in x but not y: 24, 23, 22. Rows in y but not x: 24, 23, 22. 
+    $in_f
+    # A tibble: 3 × 3
+       year location  variable
+      <int>    <chr>     <chr>
+    1  2008      usa count_all
+    2  2008      usa  count_np
+    3  2008      usa   count_p
+    
+    $in_q
+    # A tibble: 3 × 3
+       year location  variable
+      <int>    <chr>     <chr>
+    1  2008       us count_all
+    2  2008       us  count_np
+    3  2008       us   count_p
+
+Three datapoints are marked with a location of usa in the fulfiller
+dataset. As an analyst I would mark this down as something for them
+to change or if it is unclear I would have to investigate to find
+out which version is correct.
+
+With such a minor issue I would probably take these rows out so I 
+could continue my investigation since I know that I will look at this 
+again but I want to be able to give the fulfiller any further changes that
+I could find:
+
+    f <- f %>% filter(year != 2008)
+    q <- q %>% filter(year != 2008)
+
+Then I would recreate the datapoints object
+
+    dp <- data_points(f, q)
+
+Finally I would try again to match all values:
+
+    t <- show_values(dp)
+    
+You can look at the `match` field if you rather avoid sifting
+through all the information assigned to `t` here.
+
+    t$match
+
+    Rows in x but not y: 25, 12. Rows in y but not x: 25, 12. 
+
+So, again we are not matching but the categories are not the issue.
+
+>**NOTE** you might have used `show_categories` here to test but I 
+skipped that to go right to the big check above.
+
+In this instance the `t` object also returns a dataset that lists all the
+datapoints, their values and whether they match:
+
+    head(t$d)
+    
+    # A tibble: 6 × 7
+      in_dataset  year location  variable value.f value.q match
+           <chr> <int>    <chr>     <chr>   <int>   <int> <lgl>
+    1     common  2001       us count_all 2850006 2850006  TRUE
+    2     common  2002       us count_all 2910675 2910675  TRUE
+    3     common  2003       us count_all 3019234 3019234  TRUE
+    4     common  2004       us count_all 3059929 3059929  TRUE
+    5     common  2005       us count_all 3095418 3095418  TRUE
+    6     common  2006       us count_all 3115511 3115511  TRUE
+
+You can inspect that dataset to find out where we are not matching
+up:
+
+    filter(t$d, match == FALSE)
+    
+    # A tibble: 2 × 7
+      in_dataset  year location variable value.f value.q match
+           <chr> <int>    <chr>    <chr>   <int>   <int> <lgl>
+    1     common  2003       us count_np  299330  299287 FALSE
+    2     common  2007       us  count_p 2893811 2893045 FALSE
+
+As you can see for 2003 and 2007 we are reporting different numbers. So
+the next step would be to talk either try to figure out why and then
+attempt to resolve this with the fulfiller.
+
+Sometimes, you will go through this process two or three times before
+agreeing that a statistical table is ready to go
