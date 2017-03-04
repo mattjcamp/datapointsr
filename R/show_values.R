@@ -14,9 +14,9 @@ show_values  <- function(dp){
 
   me <- list()
 
-  match_cat <- match_categories(dp)
+  match_cat <- match_category_metadata(dp)
   if (!match_cat$equal)
-    me$message <- "show_variables: Categories must match before you can match value content"
+    me$message <- "show_variables: Category metadata must match before you can match value content"
   else {
 
     f <- dp$f

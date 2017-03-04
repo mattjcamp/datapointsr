@@ -69,6 +69,7 @@ create wide datasets for both roles (the Fulfiller and QC Analyst).
 
 First, create the source statistical table:
 
+    library(tidyverse)
     library(wicher)
     
     d <- wiche_graduate_projections %>% 
@@ -155,39 +156,40 @@ once first using `show_values`:
 
     t <- show_values(dp)
     
-    t
+    t$match
     
-    $message
-    [1] "show_variables: Categories must match before you can match value content"
+    Rows in x but not y: 28, 27, 18, 13, 8. Rows in y but not x: 28, 27, 18, 13, 8. 
 
-We can't match all the values yet because categories are not in sync. But, we 
-can look more closely at the categories to see what is happening by using the
-`show_categories` function:
+We are not matching yet so I would look more closely at this `t` result object
+to try and find out why. One thing that you can do is test to see what datapoints
+the two datasets have in common or not:
 
-    show_categories(dp)
-    
-    $match
-    Rows in x but not y: 24, 23, 22. Rows in y but not x: 24, 23, 22. 
-    $in_f
-    # A tibble: 3 × 3
-       year location  variable
-      <int>    <chr>     <chr>
-    1  2008      usa count_all
-    2  2008      usa  count_np
-    3  2008      usa   count_p
-    
-    $in_q
-    # A tibble: 3 × 3
-       year location  variable
-      <int>    <chr>     <chr>
-    1  2008       us count_all
-    2  2008       us  count_np
-    3  2008       us   count_p
+    t$d %>% group_by(in_dataset) %>% count()
 
-Three datapoints are marked with a location of usa in the fulfiller
-dataset. As an analyst I would mark this down as something for them
-to change or if it is unclear I would have to investigate to find
-out which version is correct.
+    # A tibble: 3 × 2
+      in_dataset     n
+           <chr> <int>
+    1     common    27
+    2  only_in_f     3
+    3  only_in_q     3
+
+We can see that three data points seem out of sync. We can look at these more closely:
+
+    filter(t$d, in_dataset != "common")
+
+    # A tibble: 6 × 7
+      in_dataset  year location  variable value.f value.q match
+           <chr> <int>    <chr>     <chr>   <int>   <int> <lgl>
+    1  only_in_f  2008      usa   count_p 3001337      NA    NA
+    2  only_in_f  2008      usa  count_np  314100      NA    NA
+    3  only_in_f  2008      usa count_all 3315437      NA    NA
+    4  only_in_q  2008       us   count_p      NA 3001337    NA
+    5  only_in_q  2008       us  count_np      NA  314100    NA
+    6  only_in_q  2008       us count_all      NA 3315437    NA
+
+You can tell pretty quickly that the location is marked **usa** in
+the `f` dataset but **us** in the QC dataset. As an analyst I would mark 
+this down as something for them to change or I would investigate more.
 
 With such a minor issue I would probably take these rows out so I 
 could continue my investigation since I know that I will look at this 
@@ -205,35 +207,12 @@ Finally I would try again to match all values:
 
     t <- show_values(dp)
     
-You can look at the `match` field if you rather avoid sifting
-through all the information assigned to `t` here.
-
     t$match
 
     Rows in x but not y: 25, 12. Rows in y but not x: 25, 12. 
 
-So, again we are not matching but the categories are not the issue.
-
->**NOTE** you might have used `show_categories` here to test but I 
-skipped that to go right to the big check above.
-
-In this instance the `t` object also returns a dataset that lists all the
-datapoints, their values and whether they match:
-
-    head(t$d)
-    
-    # A tibble: 6 × 7
-      in_dataset  year location  variable value.f value.q match
-           <chr> <int>    <chr>     <chr>   <int>   <int> <lgl>
-    1     common  2001       us count_all 2850006 2850006  TRUE
-    2     common  2002       us count_all 2910675 2910675  TRUE
-    3     common  2003       us count_all 3019234 3019234  TRUE
-    4     common  2004       us count_all 3059929 3059929  TRUE
-    5     common  2005       us count_all 3095418 3095418  TRUE
-    6     common  2006       us count_all 3115511 3115511  TRUE
-
-You can inspect that dataset to find out where we are not matching
-up:
+So, we are not matching. Let's inspect that dataset to find out where 
+we are not matching up:
 
     filter(t$d, match == FALSE)
     
