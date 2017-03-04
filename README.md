@@ -1,34 +1,39 @@
 # Data Points
 
-Data points makes it easy to look at statistical tables. Data in
-a statistical table is the end result of an analysis. Statistical
-tables usally contain descriptive statistics or sometimes just counts
-of objects in a group.
+**datapointsr** makes it easy to compare and contrast aggregated
+statistics stored in wide tables. With datapointsr you can:
 
-Data points melts statistical tables into a long format so it's
-easy to do an exact comparison between two sets of data points. This
-is helpful when you are looking for differences between two sets
-of data points.
+- turn wide tables into long normalized tables
+- recast datapoints objects into wide tables
+- filter on datapoints objects
+- quickly track down differences between statistics stored
+in two tables
 
-## Data Points and Tidy Data
+## Data Points vs Tidy Data
 
-Data points is heavily influenced by the [Tidyverse](https://github.com/tidyverse/tidyverse).
-A key componement of the tidyverse is the *tidy dataset*,
+datapointsr is heavily influenced by the [Tidyverse](https://github.com/tidyverse/tidyverse) 
+and is meant to be used in conjunction with tidyverse packages
+like `dpyr`.
 
->Tidy datasets are easy to manipulate, model and visualise, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.<br>
->[*Tidy Data*](http://vita.had.co.nz/papers/tidy-data.pdf), Hadley Wickham
+A tidy dataset is one where each observation has one row and each
+column has either an attribute or a measure. The first part of a data
+analysis is to build a tidy dataset from the data sources that are
+available. Tidy datasets are used to create visualizations, summarize
+data and build models.
 
-However, data points is not tidy because observations are rolled up into aggregated
-measures like counts or means. Also, variables are not situated in columns but they
-are kept in a long list index by the variable name. Each variable value get it's
-own row.
+datapointsr was created to test statistical tables that are created from
+tidy data. Usually, this means looking at a table where data has been rolled
+up into aggregations like counts or means for lots of combinations of groups.
+Typical statistical tables will include categories like gender or location then
+then have columns for calculated statistics (sometimes one hundred or more).
 
-Usually, I would work with data in a tidy format while doing an analysis. But, if I wanted
-to try to do a match for a QC analysis I would use data points format to put the results
-into a long format that is easy to compare and contrast.
+Statistical tables are not tidy because they contained aggregated data. They 
+are the kinds of artifacts that are sent to other areas for reports or further 
+analysis.
 
-However, like the tidyverse components data points also makes use of a grammer
-syntax that includes easy to remember verbs.
+>This is where datapointsr comes in
+
+
 
 ## Data Points Format
 
