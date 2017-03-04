@@ -33,55 +33,27 @@ analysis.
 
 >This is where datapointsr comes in
 
+Our job is to either create these statistical tables or to verify that these
+tables are correct. To verify that a statistical table is correct we need one
+analysis to independently create the table and then compare his or her results
+to the table we are sending out.
 
+Comparing two wide tables with potentially hundreds of column and thousands of rows
+can be hard to automate. datapoints helps by casting both tables into a common format.
+Once we have this format, we can compare and contrast both statistical tables easily
+and with reusable functions.
 
 ## Data Points Format
 
-  - **Category** fields that define categories that you can filter on
-  - **variable** the original measure (mean, n, etc)
+This common format is simply that the second to the last column
+must be named `variable` and store the name of the measure (what used 
+to in the wide set of columns). The last column must be named `value` and 
+store the aggregated statistic.
+
+  - **variable** the measure label
   - **value** the value of the measure
 
-## QC Analysis Workflow
+You can recognized these names as what comes out of the `melt` function. The remaining
+columns are all categories. We are just giving each data point it's own row.
 
-One of the applications of data points is QC Analysis. The workflow is to ingest the 
-dataset to be QC'ed named `f` (for fulfiller). The next step is to attempt to build a reference
-dataset named `q` (for QC'er) that follows the same specifications that the fulfiller
-used.
-
-Once you have these datasets, you use them to create two datapoints objects. Then you 
-create a `data_points` object with the `f` and `q` data points. This is the
-object that you will test. You can look to see if the expected categories are in place
-and in the right format. You can also tests if the values in both datasets match.
-
-### Example Workflow
-
-Here is how to see if two sets of categories match up using datapoints using the 
-`quakes` built-in dataset as an example.
-
-    # PULL THE DATASETS
-    
-    f <- quakes
-    q <- quakes
-    
-    # BUILD THE DATAPOINTS OBJECTS
-    
-    f <- as.data.points(f, c(1,2,5))
-    q <- as.data.points(q, c(1,2,5))
-    
-    # BUILD THE DATAPOINTS OBJECT
-    
-    dp <- data_points(f, q)
-    
-    # CHECK TO SEE IF THEY MATCH
-    
-    match_categories(dp)
-
-This would report back `Equal`. If you don't specify the list member that you want you will
-get more information.
-
-You can also look more closely at the result:
-
-    show_categories(dp)
-    
-This can be done for categories, category metadata and values.
-  
+## Workflow
