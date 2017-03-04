@@ -67,7 +67,7 @@ I will use the data in wicher to build the two datasets that we want to
 compare. BTW this part is going to be a little janky because I have to sort of artifically
 create wide datasets for both roles (the Fulfiller and QC Analyst).
 
-First, create the fulfiller's statistical table:
+First, create the source statistical table:
 
     library(wicher)
     
@@ -79,7 +79,7 @@ First, create the fulfiller's statistical table:
       mutate(variable = sprintf("count_%s", sector),
              value = n) %>% 
       select(year, location, variable, value) %>% 
-      wide(f)
+      wide()
 
 This gives you the enrollments of schools for 2001 to
 2010 by sector:
