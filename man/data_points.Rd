@@ -2,19 +2,17 @@
 % Please edit documentation in R/data_points.R
 \name{data_points}
 \alias{data_points}
-\title{Look at Two Sets of Data Points}
+\title{Contains Both Datasets}
 \usage{
 data_points(f, q)
 }
 \arguments{
 \item{f}{a data points object provided by the fulfiller}
 
-\item{q}{a data points object produced by the qc'er}
+\item{q}{a data points object produced by the qc analyst}
 }
 \description{
 Returns an object that holds two datasets in data points format, use
 with functions that compare datapoints
 }
-\keyword{QC,}
-\keyword{matching}
 

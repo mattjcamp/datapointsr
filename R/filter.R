@@ -9,7 +9,7 @@
 
 filter <- function(d, ...){
 
-  if ("data.points" %in% class(d)) {
+  if ("data_points" %in% class(d)) {
 
     me <- list()
     me$f <- dplyr::filter(d$f, ...)

@@ -69,6 +69,7 @@ create wide datasets for both roles (the Fulfiller and QC Analyst).
 
 First, create the source statistical table:
 
+    library(datapointsr)
     library(tidyverse)
     library(wicher)
     
@@ -154,28 +155,28 @@ category metadata, just the categories in each or you can just check
 everything at once. Usually, you will attempt to check everything at
 once first using `show_values`:
 
-    t <- show_values(dp)
+    m <- match_data_points(dp)
     
-    t$match
+    m$match
     
     Rows in x but not y: 28, 27, 18, 13, 8. Rows in y but not x: 28, 27, 18, 13, 8. 
 
-We are not matching yet so I would look more closely at this `t` result object
+We are not matching yet so I would look more closely at this `m` result object
 to try and find out why. One thing that you can do is test to see what datapoints
 the two datasets have in common or not:
 
-    t$d %>% group_by(in_dataset) %>% count()
+    m$ds %>% group_by(is) %>% count()
 
     # A tibble: 3 × 2
       in_dataset     n
            <chr> <int>
-    1     common    27
+    1    in_both    27
     2  only_in_f     3
     3  only_in_q     3
 
 We can see that three data points seem out of sync. We can look at these more closely:
 
-    filter(t$d, in_dataset != "common")
+    filter(m$ds, is != "in_both")
 
     # A tibble: 6 × 7
       in_dataset  year location  variable value.f value.q match
@@ -205,22 +206,22 @@ Then I would recreate the datapoints object
 
 Finally I would try again to match all values:
 
-    t <- show_values(dp)
+    m <- match_data_points(dp)
     
-    t$match
+    m$match
 
     Rows in x but not y: 25, 12. Rows in y but not x: 25, 12. 
 
 So, we are not matching. Let's inspect that dataset to find out where 
 we are not matching up:
 
-    filter(t$d, match == FALSE)
+    filter(m$ds, match == FALSE)
     
     # A tibble: 2 × 7
-      in_dataset  year location variable value.f value.q match
-           <chr> <int>    <chr>    <chr>   <int>   <int> <lgl>
-    1     common  2003       us count_np  299330  299287 FALSE
-    2     common  2007       us  count_p 2893811 2893045 FALSE
+           is match f_value q_value  year location variable
+        <chr> <lgl>   <chr>   <chr> <chr>    <chr>    <chr>
+    1 in_both FALSE  299299  299287  2003       us count_np
+    2 in_both FALSE 2893787 2893045  2007       us  count_p
 
 As you can see for 2003 and 2007 we are reporting different numbers. So
 the next step would be to talk either try to figure out why and then

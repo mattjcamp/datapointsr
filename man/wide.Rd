@@ -2,17 +2,14 @@
 % Please edit documentation in R/wide.R
 \name{wide}
 \alias{wide}
-\title{Wide}
+\title{Wide Data Points Format}
 \usage{
-wide(dp)
+wide(df)
 }
 \arguments{
-\item{dp}{a data points object}
+\item{df}{a \link[datapointsr]{long} format dataframe}
 }
 \description{
-Returns a dataset in a wide format
+Returns a \link[datapointsr]{long} dataset as wide format
 }
-\keyword{QC}
-\keyword{dataset,}
-\keyword{utility,}
 
