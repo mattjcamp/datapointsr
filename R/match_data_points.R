@@ -103,7 +103,8 @@ match_data_points  <- function(dp){
 
   ds <- bind_rows(both, only_in_f, only_in_q) %>%
     mutate(match = f_value == q_value) %>%
-    select(is, match, f_value, q_value, everything())
+    select(is, match, f_value, q_value, everything()) %>%
+    mutate(match = ifelse(is.na(match), FALSE, match))
 
   me$match <- testthat::compare(f, q)
   me$ds <- ds
