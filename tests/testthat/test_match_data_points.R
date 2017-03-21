@@ -139,3 +139,36 @@ test_that("FINDS MISMATCHED CATEGORY METADATA", {
   expect_false(m$match_meta$equal)
 
 })
+
+test_that("DEALS WITH NA VALUES", {
+
+  f <- d
+  q <- d
+
+  f[3, 4] <- NA
+  q[3, 4] <- NA
+
+  f <- f %>% long(1:2)
+  q <- q %>% long(1:2)
+
+  dp <- data_points(f, q)
+  m <- match_data_points(dp)
+  t <- m$ds
+
+  expect_true(m$match$equal)
+
+  f <- d
+  q <- d
+
+  f[3, 4] <- NA
+
+  f <- f %>% long(1:2)
+  q <- q %>% long(1:2)
+
+  dp <- data_points(f, q)
+  m <- match_data_points(dp)
+  t <- m$ds
+
+  expect_false(m$match$equal)
+
+})

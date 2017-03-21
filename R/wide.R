@@ -12,7 +12,8 @@ wide <- function(df){
   len <- length(names(df)) - 2
   d <- stats::reshape(df,
                       timevar = "variable",
-                      times = "value",idvar = names(df)[1:len],
+                      times = "value",
+                      idvar = names(df)[1:len],
                       direction = "wide")
   names(d) <- stringr::str_replace_all(names(d), "value.", "")
 
