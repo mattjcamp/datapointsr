@@ -12,4 +12,3 @@ wide(df)
 \description{
 Returns a \link[datapointsr]{long} dataset as wide format
 }
-

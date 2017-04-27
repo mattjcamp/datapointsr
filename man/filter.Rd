@@ -13,4 +13,3 @@ filter(d, ...)
 Filters data points
 }
 \keyword{dataset}
-

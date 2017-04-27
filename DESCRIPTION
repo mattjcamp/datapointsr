@@ -7,7 +7,7 @@ Maintainer: Matt Campbell <mjcampbell74@gmail.com>
 Description: datapointsr makes it easy to compare and contrast aggregated statistics stored in wide tables. With datapointsr you can: turn wide tables into long normalized tables, recast long into wide tables, filter on datapoints objects, quickly track down differences between statistics stored in two tables
 License: None
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Imports:
   data.table,
   tidyverse

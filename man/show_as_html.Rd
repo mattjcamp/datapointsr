@@ -14,4 +14,3 @@ show_as_html(matched_data_points, title)
 \description{
 Summarizes the results of a match QC with HTML for R Markdown display
 }
-

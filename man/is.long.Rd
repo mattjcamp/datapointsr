@@ -12,4 +12,3 @@ is.long(df)
 \description{
 Make sure the dataset is in long format and that the last two columns are always a named variable and value.
 }
-

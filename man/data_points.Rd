@@ -15,4 +15,3 @@ data_points(f, q)
 Returns an object that holds two datasets in data points format, use
 with functions that compare datapoints
 }
-

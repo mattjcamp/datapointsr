@@ -9,4 +9,3 @@ show_in_console(matched_data_points)
 \description{
 Summarizes the results of a match QC
 }
-

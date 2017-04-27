@@ -15,4 +15,3 @@ match_data_points checks all content including column metadata. If the match is 
 \details{
 Attempts to do an exact 1:1 match between two datasets stored in a data points object.
 }
-
