@@ -4,7 +4,6 @@
 #' @description Make sure the dataset is in long format and that the last two columns are always a named variable and value.
 #' @param df The source dataset
 #' @export
-#' @examples
 
 is.long <- function(df){
 

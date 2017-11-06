@@ -1,9 +1,8 @@
 #' Show F Mismatched Data Points
 #'
-#' @description
-#' @param match_dp
+#' @description pulls out a dataframe that shows only values that appeared in the fulfiller dataset
+#' @param match_dp match_data_points object populated with matching information.
 #' @export
-#' @examples
 
 show_f  <- function(match_dp){
 

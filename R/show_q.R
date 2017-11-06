@@ -1,9 +1,8 @@
 #' Show Q Mismatched Data Points
 #'
-#' @description
-#' @param match_dp
+#' @description pulls out a dataframe that shows only values that appeared in the qc'er dataset
+#' @param match_dp match_data_points object populated with matching information.
 #' @export
-#' @examples
 
 show_q  <- function(match_dp){
 

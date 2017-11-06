@@ -1,9 +1,10 @@
 #' Show Mismatched Data Points
 #'
-#' @description
-#' @param match_dp
+#' Look at mismatched data points.
+#'
+#' @description pulls out a dataframe that shows only values that are in both datasets but are mismatched
+#' @param match_dp match_data_points object populated with matching information.
 #' @export
-#' @examples
 
 show_both <- function(match_dp){
 

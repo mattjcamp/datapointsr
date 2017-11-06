@@ -6,3 +6,9 @@
 \usage{
 show_f(match_dp)
 }
+\arguments{
+\item{match_dp}{match_data_points object populated with matching information.}
+}
+\description{
+pulls out a dataframe that shows only values that appeared in the fulfiller dataset
+}

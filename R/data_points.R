@@ -6,7 +6,6 @@
 #' @param f a data points object provided by the fulfiller
 #' @param q a data points object produced by the qc analyst
 #' @export
-#' @examples
 
 data_points <- function(f, q){
 

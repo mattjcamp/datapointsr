@@ -6,6 +6,9 @@
 \usage{
 show_in_console(matched_data_points)
 }
+\arguments{
+\item{matched_data_points}{match_dp match_data_points object populated with matching information.}
+}
 \description{
 Summarizes the results of a match QC
 }

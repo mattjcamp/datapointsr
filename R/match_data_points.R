@@ -4,7 +4,6 @@
 #' @description match_data_points checks all content including column metadata. If the match is not 100% equal then match_data_points will return datasets describing the differences between the datasets.
 #' @param dp  \link[datapointsr]{data_points} object containing the fulfiller dataset f and the QC dataset q
 #' @export
-#' @examples
 
 match_data_points  <- function(dp){
 

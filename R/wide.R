@@ -4,7 +4,6 @@
 #' Returns a \link[datapointsr]{long} dataset as wide format
 #' @param df a \link[datapointsr]{long} format dataframe
 #' @export
-#' @examples
 
 wide <- function(df){
 

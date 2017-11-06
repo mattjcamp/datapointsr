@@ -5,7 +5,6 @@
 #' @param d data points or dataframe
 #' @keywords dataset
 #' @export
-#' @examples
 
 filter <- function(d, ...){
 

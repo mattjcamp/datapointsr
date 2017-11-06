@@ -1,10 +1,9 @@
 #' Show Match in Console
 #'
 #' Summarizes the results of a match QC
-#' @param matched_data_points
+#' @param matched_data_points match_dp match_data_points object populated with matching information.
 #' @export
-#' @examples
-
+#'
 show_in_console <- function(matched_data_points){
 
   if (!"match_data_points" %in% class(matched_data_points))

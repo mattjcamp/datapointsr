@@ -7,7 +7,6 @@
 #' @param category.cols The columns used to filter the dataset
 #' @keywords dataset, utility, QC
 #' @export
-#' @examples
 
 long <- function(df, category_cols){
 
