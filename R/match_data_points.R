@@ -33,20 +33,20 @@ match_data_points  <- function(dp){
   both <- inner_join(md_f, md_q, by = "names") %>%
     mutate(is = "in_both") %>%
     select(is, everything()) %>%
-    rename(col_name = names,
-           f_class = classes.x,
-           f_mode = modes.x,
-           q_class = classes.y,
-           q_mode = modes.y)
+    dplyr::rename(col_name = names,
+                  f_class = classes.x,
+                  f_mode = modes.x,
+                  q_class = classes.y,
+                  q_mode = modes.y)
 
   only_in_f <- anti_join(md_f, md_q, by = "names") %>%
     mutate(is = "in_f") %>%
     select(is, everything()) %>%
     mutate(q_class = NA,
            q_mode = NA) %>%
-    rename(col_name = names,
-           f_class = classes,
-           f_mode = modes) %>%
+    dplyr::rename(col_name = names,
+                  f_class = classes,
+                  f_mode = modes) %>%
     select(is, col_name, f_class, f_mode, q_class, q_mode)
 
   only_in_q <- anti_join(md_q, md_f, by = "names") %>%
@@ -54,9 +54,9 @@ match_data_points  <- function(dp){
     select(is, everything()) %>%
     mutate(f_class = NA,
            f_mode = NA) %>%
-    rename(col_name = names,
-           q_class = classes,
-           q_mode = modes) %>%
+    dplyr::rename(col_name = names,
+                  q_class = classes,
+                  q_mode = modes) %>%
     select(is, col_name, f_class, f_mode, q_class, q_mode)
 
   ds_meta <- bind_rows(both, only_in_f, only_in_q) %>%
@@ -86,19 +86,19 @@ match_data_points  <- function(dp){
   both <- inner_join(f, q, by = n) %>%
     mutate(is = "in_both") %>%
     select(is, everything()) %>%
-    rename(f_value = value.x,
-           q_value = value.y)
+    dplyr::rename(f_value = value.x,
+                  q_value = value.y)
 
   only_in_f <- anti_join(f, q, by = n) %>%
     mutate(is = "only_in_f") %>%
     select(is, everything()) %>%
-    rename(f_value = value) %>%
+    dplyr::rename(f_value = value) %>%
     mutate(q_value = NA)
 
   only_in_q <- anti_join(q, f, by = n) %>%
     mutate(is = "only_in_q",
            f_value = NA) %>%
-    rename(q_value = value) %>%
+    dplyr::rename(q_value = value) %>%
     select(is, everything(), f_value, q_value)
 
   ds <- bind_rows(both, only_in_f, only_in_q) %>%

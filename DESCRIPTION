@@ -1,7 +1,7 @@
 Package: datapointsr
 Type: Package
 Title: Painless statistical table QC analysis
-Version: 2.0.3
+Version: 2.1.1
 Author: Matt Campbell
 Maintainer: Matt Campbell <mjcampbell74@gmail.com>
 Description: datapointsr makes it easy to compare and contrast aggregated statistics stored in wide tables. With datapointsr you can: turn wide tables into long normalized tables, recast long into wide tables, filter on datapoints objects, quickly track down differences between statistics stored in two tables

@@ -8,7 +8,7 @@ library(datapointsr)
 
 # REFERENCE DATA
 
-d <- wiche_graduate_projections %>%
+d <- wiche_enrollments %>%
   filter(year %in% 2001:2010,
          grade == "g",
          race == "all",
