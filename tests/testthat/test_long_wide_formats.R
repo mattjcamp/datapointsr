@@ -35,3 +35,11 @@ test_that("LONG TO WIDE", {
   expect_length(f$year, 10)
 
 })
+
+test_that("WIDE TO LONG WORKS WITH ONE COLUMN", {
+
+  f <- d %>% select(year) %>% long(1)
+  expect_length(f$variable, 10)
+
+})
+
