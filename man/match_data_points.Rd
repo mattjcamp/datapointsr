@@ -7,7 +7,7 @@
 match_data_points(dp)
 }
 \arguments{
-\item{dp}{\link[datapointsr]{data_points} object containing the fulfiller dataset f and the QC dataset q}
+\item{dp}{\link[datapointsr]{data_points} object containing the fulfiller dataset a and the QC dataset b}
 }
 \description{
 match_data_points checks all content including column metadata. If the match is not 100% equal then match_data_points will return datasets describing the differences between the datasets.

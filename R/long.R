@@ -2,7 +2,10 @@
 #' Convert Data Frame to Data Points Format
 #'
 #' Makes it easier to look at datasets by putting a statistical table into a common format
-#' @description as.data.points returns a melted data frame in tibble format. The last two columns are always a named variable and value. variable is a character type and would be a column header in a tidy dataframe. The preceding columns are all categories that you can select from.
+#' @description as.data.points returns a melted data frame in tibble format. The last two
+#' columns are always a named variable and value. variable is a character type and would be
+#' a column header in a tidy dataframe. The preceding columns are all categories that you
+#' can select from.
 #' @param df The source dataset
 #' @param category.cols The columns used to filter the dataset
 #' @keywords dataset, utility, QC

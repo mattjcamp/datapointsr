@@ -4,12 +4,12 @@
 \alias{data_points}
 \title{Contains Both Datasets}
 \usage{
-data_points(f, q)
+data_points(a, b)
 }
 \arguments{
-\item{f}{a data points object provided by the fulfiller}
+\item{a}{a data points object provided by the fulfiller in the first dataset}
 
-\item{q}{a data points object produced by the qc analyst}
+\item{b}{a data points object produced by the qc analyst in the second dataset}
 }
 \description{
 Returns an object that holds two datasets in data points format, use

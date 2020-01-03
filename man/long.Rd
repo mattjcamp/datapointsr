@@ -12,7 +12,10 @@ long(df, category_cols)
 \item{category.cols}{The columns used to filter the dataset}
 }
 \description{
-as.data.points returns a melted data frame in tibble format. The last two columns are always a named variable and value. variable is a character type and would be a column header in a tidy dataframe. The preceding columns are all categories that you can select from.
+as.data.points returns a melted data frame in tibble format. The last two
+columns are always a named variable and value. variable is a character type and would be
+a column header in a tidy dataframe. The preceding columns are all categories that you
+can select from.
 }
 \details{
 Makes it easier to look at datasets by putting a statistical table into a common format
