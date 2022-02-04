@@ -172,3 +172,4 @@ test_that("DEALS WITH NA VALUES", {
   expect_false(m$match$equal)
 
 })
+

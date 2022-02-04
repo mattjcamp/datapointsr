@@ -46,6 +46,12 @@ match_data_points  <- function(dp){
     dplyr::rename(col_name = names,
                   a_class = classes,
                   a_mode = modes) %>%
+    mutate(is = as.character(is),
+           col_name = as.character(col_name),
+           a_class = as.character(a_class),
+           a_mode = as.character(a_mode),
+           b_class = as.character(b_class),
+           b_mode = as.character(b_mode)) %>%
     select(is, col_name, a_class, a_mode, b_class, b_mode)
 
   only_in_b <- anti_join(md_b, md_a, by = "names") %>%
@@ -56,9 +62,16 @@ match_data_points  <- function(dp){
     dplyr::rename(col_name = names,
                   b_class = classes,
                   b_mode = modes) %>%
+    mutate(is = as.character(is),
+           col_name = as.character(col_name),
+           a_class = as.character(a_class),
+           a_mode = as.character(a_mode),
+           b_class = as.character(b_class),
+           b_mode = as.character(b_mode)) %>%
     select(is, col_name, a_class, a_mode, b_class, b_mode)
 
-  ds_meta <- bind_rows(both, only_in_a, only_in_b) %>%
+  ds_meta <-
+    bind_rows(both, only_in_a, only_in_b) %>%
     mutate(match = as.character(a_class) == as.character(b_class) & as.character(a_mode) == as.character(b_mode)) %>%
     select(is, match, everything())
 
@@ -86,19 +99,25 @@ match_data_points  <- function(dp){
     mutate(is = "in_both") %>%
     select(is, everything()) %>%
     dplyr::rename(a_value = value.x,
-                  b_value = value.y)
+                  b_value = value.y) %>%
+    mutate(a_value = as.character(a_value),
+           b_value = as.character(b_value))
 
   only_in_a <- anti_join(a, b, by = n) %>%
     mutate(is = "only_in_a") %>%
     select(is, everything()) %>%
     dplyr::rename(a_value = value) %>%
-    mutate(b_value = NA)
+    mutate(b_value = NA) %>%
+    mutate(a_value = as.character(a_value),
+           b_value = as.character(b_value))
 
   only_in_b <- anti_join(b, a, by = n) %>%
     mutate(is = "only_in_b",
            a_value = NA) %>%
     dplyr::rename(b_value = value) %>%
-    select(is, everything(), a_value, b_value)
+    select(is, everything(), a_value, b_value) %>%
+    mutate(a_value = as.character(a_value),
+           b_value = as.character(b_value))
 
   ds <- bind_rows(both, only_in_a, only_in_b) %>%
     mutate(match = a_value == b_value) %>%
@@ -112,6 +131,7 @@ match_data_points  <- function(dp){
   class(me) <- append(class(me), "match_data_points")
 
   me
+
 
 }
 
