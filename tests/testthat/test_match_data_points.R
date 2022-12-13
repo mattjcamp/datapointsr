@@ -1,175 +1,107 @@
 
-context("MATCH DATA POINTS")
+context("DIFF")
 
 library(testthat)
 library(tidyverse)
-library(wicher)
-library(datapointsr)
+#library(datapointsr)
 
-# REFERENCE DATA
+# TESTING DATA
 
-d <- wiche_enrollments %>%
-  filter(year %in% 2001:2010,
-         grade == "g",
-         race == "all",
-         location == "us") %>%
-  mutate(variable = sprintf("count_%s", sector),
-         value = n) %>%
-  select(year, location, variable, value) %>%
-  wide()
+ds1  <-tibble(
+  x = 1:5
+  , y = 1:5
+  , z = c("A", "B", "C", "D", "E")
+  )
+
+ds2  <-tibble(
+  x = 1:5
+  , y = 1:5
+  , z = c("A", "B", "C", "D", "E")
+)
+
+ds3  <-tibble(
+  x = 1:5
+  , y = c(1:3, 7, 5)
+  , z = c("A", "B", "C", "D", "E")
+)
+
+ds4  <-tibble(
+  x = 1:5
+  , y = 1:5
+  , z = c("A", "Z", "C", "D", "E")
+)
+
+ds5  <-tibble(
+  x = 1:5
+  , y = c(1:3, 7, 5)
+  , z = c("A", "Z", "C", "D", "E")
+)
+
+ds6  <-tibble(
+  x = 2:5
+  , y = 2:5
+  , z = c("B", "C", "D", "E")
+)
+
+ds7  <-tibble(
+  x = 2:5
+  , y = c(2:3, 7, 5)
+  , z = c("Z", "C", "D", "E")
+)
 
 test_that("FINDS EXACT MATCH", {
 
-  # FULFILLER AND QC DATA
+  m <-
+    diff(
+      dataset1 = ds1
+      , dataset2 = ds2
+      , vars = c("x", "y", "z")
+      , keys = "x"
+      )
 
-  f <- d
-  q <- d
-
-  # DATA POINTS FORMATS
-
-  f <- f %>% long(1:2)
-  q <- q %>% long(1:2)
-
-  dp <- data_points(f, q)
-  m <- match_data_points(dp)
-
-  # TEST MATCH RESULTS
-
-  expect_true(m$match$equal)
+  expect_equal(
+    m %>%
+      filter(match) %>%
+      count() %>%
+      as.numeric(), 10
+    )
 
 })
 
-test_that("FINDS MISMATCHED VALUES", {
+test_that("FINDS ONE OFF ERROR", {
 
-  # FULFILLER AND QC DATA
+  m <-
+    diff(
+      dataset1 = ds1
+      , dataset2 = ds3
+      , vars = 1:3
+      , keys = 1
+    )
 
-  f <- d
-  q <- d
-
-  # INSERT NOISE
-
-  f[3, 4] <- f[3, 4] + sample(1:100, 1)
-  f[7, 5] <- f[7, 5] + sample(1:1000, 1)
-
-  # DATA POINTS FORMATS
-
-  f <- f %>% long(1:2)
-  q <- q %>% long(1:2)
-
-  dp <- data_points(f, q)
-  m <- match_data_points(dp)
-
-  # TEST MATCH RESULTS
-
-  expect_false(m$match$equal)
+  expect_equal(
+    m %>%
+      filter(!match) %>%
+      count() %>%
+      as.numeric(), 1
+  )
 
 })
 
-test_that("FINDS MISLABELED CATEGORY VALUES", {
+test_that("FINDS MISSING ROW", {
 
-  # FULFILLER AND QC DATA
+  m <-
+    diff(
+      dataset1 = ds1
+      , dataset2 = ds6
+      , vars = 1:3
+      , keys = 1
+    )
 
-  f <- d
-  q <- d
-
-  # INSERT NOISE
-
-  f[8, 2] <- "usa"
-
-  # DATA POINTS FORMATS
-
-  f <- f %>% long(1:2)
-  q <- q %>% long(1:2)
-
-  dp <- data_points(f, q)
-  m <- match_data_points(dp)
-
-  # TEST MATCH RESULTS
-
-  expect_false(m$match$equal)
+  expect_equal(
+    m %>%
+      filter(is == "only_in_a") %>%
+      count() %>%
+      as.numeric(), 2
+  )
 
 })
-
-test_that("FINDS MISSING CATEGORIES", {
-
-  # FULFILLER AND QC DATA
-
-  f <- d
-  q <- d
-
-  # INSERT NOISE
-
-  f$location <- NULL
-
-  # DATA POINTS FORMATS
-
-  f <- f %>% long(1)
-  q <- q %>% long(1:2)
-
-  dp <- data_points(f, q)
-  m <- match_data_points(dp)
-
-  # TEST MATCH RESULTS
-
-  expect_false(m$match_meta$equal)
-
-})
-
-test_that("FINDS MISMATCHED CATEGORY METADATA", {
-
-  # FULFILLER AND QC DATA
-
-  f <- d
-  q <- d
-
-  # INSERT NOISE
-
-  f$year <- as.character(f$year)
-
-  # DATA POINTS FORMATS
-
-  f <- f %>% long(1:2)
-  q <- q %>% long(1:2)
-
-  dp <- data_points(f, q)
-  m <- match_data_points(dp)
-
-  # TEST MATCH RESULTS
-
-  expect_false(m$match_meta$equal)
-
-})
-
-test_that("DEALS WITH NA VALUES", {
-
-  f <- d
-  q <- d
-
-  f[3, 4] <- NA
-  q[3, 4] <- NA
-
-  f <- f %>% long(1:2)
-  q <- q %>% long(1:2)
-
-  dp <- data_points(f, q)
-  m <- match_data_points(dp)
-  t <- m$ds
-
-  expect_true(m$match$equal)
-
-  f <- d
-  q <- d
-
-  f[3, 4] <- NA
-
-  f <- f %>% long(1:2)
-  q <- q %>% long(1:2)
-
-  dp <- data_points(f, q)
-  m <- match_data_points(dp)
-  t <- m$ds
-
-  expect_false(m$match$equal)
-
-})
-

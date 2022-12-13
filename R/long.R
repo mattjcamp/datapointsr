@@ -13,6 +13,10 @@
 
 long <- function(df, category_cols){
 
+  df <-
+    df %>%
+    mutate(across(everything(), as.character))
+
   if (!is.numeric(category_cols))
     category_cols <- match(category_cols, names(df))
 
