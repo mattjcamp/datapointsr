@@ -49,6 +49,22 @@ ds7  <-tibble(
   , z = c("Z", "C", "D", "E")
 )
 
+ds8 <- tibble(
+  x = 1:5,
+  y = 1:5,
+  z = c("A", "B", "NULL", "D", "NAS"),
+  a = c(NA, "NULLL", "C", "NA", "E"),
+  b = c(3.14159, 2.71828, NA, 999, 1.0)
+)
+
+ds9 <- tibble(
+  x = 1:5,
+  y = 1:5,
+  z = c("A", "B", "", "D", "NAS"),
+  a = c("NA", "NULLL", "C", "NA", "E"),
+  b = c(3.1415, 2.71828, NA, 999, 1.0000001)
+)
+
 test_that("FINDS EXACT MATCH", {
 
   m <-
@@ -106,22 +122,21 @@ test_that("FINDS MISSING ROW", {
 
 })
 
-ds1 <- tibble(
-  x = 1:5
-  , y = 1:5
-  , z = c("A", "B", "C", "D", "E")
-)
+test_that("MATCHES CLEANED DATASETS", {
 
-ds2 <- tibble(
-  x = 1:5
-  , y = c(1:3, 7, 5)
-  , z = c("A", "B", "C", "D", "E")
-)
+  m <-
+    diff(
+      dataset1 = ds8
+      , dataset2 = ds9
+      , vars = 1:5
+      , keys = 1
+    )
 
-m <-
-  diff(
-       dataset1 = ds1
-       , dataset2 = ds3
-       , vars = c("x", "y", "z")
-       , keys = c("x")
+  expect_equal(
+    m %>%
+      filter(match) %>%
+      count() %>%
+      as.numeric(), 20
   )
+
+})

@@ -4,7 +4,7 @@
 \alias{diff}
 \title{Compare Two Datasets}
 \usage{
-diff(dataset1, dataset2, vars, keys)
+diff(dataset1, dataset2, vars, keys, clean = TRUE)
 }
 \arguments{
 \item{dataset1}{first dataset to compare}
@@ -19,6 +19,9 @@ names in an array with quotes or the number positions. The key must be
 selected in the vars list as well and the numeric position must correspond to
 the position in the vars select list. It's easier to use the text description
 here.}
+
+\item{clean}{apply datapointsr clean function to strip out NULLS, NAS, and
+round numbers to 1 decimal place}
 }
 \description{
 Takes two datasets and compares them looking for common values in the two

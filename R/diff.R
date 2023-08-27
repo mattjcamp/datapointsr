@@ -13,6 +13,8 @@
 #' selected in the vars list as well and the numeric position must correspond to
 #' the position in the vars select list. It's easier to use the text description
 #' here.
+#' @param clean apply datapointsr clean function to strip out NULLS, NAS, and
+#' round numbers to 1 decimal place
 #' @examples
 #' library(tidyverse)
 #' library(datapointsr)
@@ -49,7 +51,12 @@
 #'
 #' @export
 
-diff <- function(dataset1, dataset2, vars, keys) {
+diff <- function(dataset1, dataset2, vars, keys, clean = TRUE) {
+
+  if(clean){
+    dataset1 <- dataset1 %>% clean()
+    dataset2 <- dataset2 %>% clean()
+  }
 
   a <-
     dataset1 %>%
@@ -63,6 +70,9 @@ diff <- function(dataset1, dataset2, vars, keys) {
 
   dp <- data_points(a, b)
   m <- match_data_points(dp)
+
+  print(m$ds %>% group_by(is, match) %>% count())
+
   m$ds
 
 }
