@@ -53,6 +53,8 @@
 
 diff <- function(dataset1, dataset2, vars, keys, clean = TRUE) {
 
+  library(tidyverse)
+
   if(clean){
     dataset1 <- dataset1 %>% clean()
     dataset2 <- dataset2 %>% clean()
