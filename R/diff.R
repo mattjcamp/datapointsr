@@ -6,9 +6,13 @@
 #' same type of dataset with common variables and keys.
 #' @param dataset1 first dataset to compare
 #' @param dataset2 second dataset to compre
-#' @param vars list of variables that you want to look at. The list can be the column names in quotes or the number positions.
-#' @param keys list of key fields the two datasets have in common that will. . The list can be the column names in quotes or the number positions.
-#' be used to join
+#' @param vars list of variables that you want to compare. The list can be the
+#' column names in quotes or the number positions.
+#' @param keys key fields the two datasets have in common. Can be the column
+#' names in an array with quotes or the number positions. The key must be
+#' selected in the vars list as well and the numeric position must correspond to
+#' the position in the vars select list. It's easier to use the text description
+#' here.
 #' @examples
 #' library(tidyverse)
 #' library(datapointsr)
@@ -32,6 +36,14 @@
 #'        , vars = 1:3
 #'        , keys = 1
 #'   )
+#'
+#' m <-
+#'   diff(
+#'       dataset1 = ds1
+#'       , dataset2 = ds3
+#'       , vars = c("x", "y", "z")
+#'       , keys = c("x")
+#'  )
 #'
 #'   m
 #'

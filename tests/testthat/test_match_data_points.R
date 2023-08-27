@@ -105,3 +105,23 @@ test_that("FINDS MISSING ROW", {
   )
 
 })
+
+ds1 <- tibble(
+  x = 1:5
+  , y = 1:5
+  , z = c("A", "B", "C", "D", "E")
+)
+
+ds2 <- tibble(
+  x = 1:5
+  , y = c(1:3, 7, 5)
+  , z = c("A", "B", "C", "D", "E")
+)
+
+m <-
+  diff(
+       dataset1 = ds1
+       , dataset2 = ds3
+       , vars = c("x", "y", "z")
+       , keys = c("x")
+  )
