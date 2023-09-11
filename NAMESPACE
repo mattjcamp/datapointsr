@@ -3,6 +3,7 @@
 export(clean)
 export(data_points)
 export(diff)
+export(find_dups)
 export(is.long)
 export(long)
 export(match_data_points)
